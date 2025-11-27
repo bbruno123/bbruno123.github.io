@@ -17,37 +17,25 @@ body {
     max-width: 100%;
 }
 
-/* .cabecalho {
+.cabecalho {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    gap: 5px;
+    /* justify-content: space-between; */
+    /* gap: 100px; */
     align-items: center;
     background: white;
 
-    border: 1px solid black;
+    /* border: 1px solid black; */
 
     padding: 0px 0px 0px 20px;
 
     width: 100%;
-    height: 50px;
+    height: 65px;
 
-} */
-
-.cabecalho {
-    background-color: #1d2a35;
-    display: flex;
-    justify-content: space-between;
-    padding: 6px;
-
-    gap: 50px;
 }
 
 .menu_esquerdo span {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
+    margin: 4px;
 
 }
 
@@ -55,11 +43,135 @@ body {
     display: flex;
     background-color: black;
     border-radius: 10px;
-    width: 25px;
+    width: 18px;
     height: 2px;
 
 }
 
 .logo_cabecalho {
-    border: 1px solid black;
+    margin-left: 25px;
+
+    width: auto;
+    height: 24px;
+}
+
+.search_bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 500px;
+    height: 40px;
+
+    margin-left: 490px;
+    margin-right: 490px;
+}
+
+.search {
+    display: flex;
+    background-color: transparent;
+    border: 1px solid lightgray;
+    border-radius: 50px;
+    
+    width: 100%;
+    height: 100%;
+}
+
+.search_icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-left: 2px solid rgb(233, 233, 233);
+    /* background-color: rgb(233, 233, 233); */
+
+    width: 60px;
+    height: 38px;
+
+    padding: 0px 20px;
+
+}
+
+.search_icon img {
+    width: 20px;
+    height: 20px;
+}
+
+
+.search_input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+
+    padding: 0px 0px 0px 10px;
+
+    width: 100%;
+    height: 100%;
+}
+
+
+.mic_icon_background {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* background-color: rgb(233, 233, 233); */
+    
+    border: 1px solid  rgb(233, 233, 233);
+    border-radius: 50%;
+    
+    
+    width: 36px;
+    height: 36px;
+}
+
+.mic_icon_position {
+    margin-left: 12px;
+}
+
+.menu_direito {
+    display: flex;
+    flex-direction: column;
+
+    gap: 2.7px;
+
+    margin-left: 50px;
+}
+
+.bolinha {
+    background-color: black;
+    border-radius: 50%;
+
+    width: 4px;
+    height: 4px;
+}
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100px;
+    height: 38px;
+    
+    margin-left: 12px;
+}
+
+.login_bar {
+    border: 1px solid rgb(233, 233, 233);
+    border-radius: 50px;
+
+    width: 100%;
+    height: 80%;
+}
+
+#login_text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 14px;
+    color: rgb(0, 85, 196);
+
 }
