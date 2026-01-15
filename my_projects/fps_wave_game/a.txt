@@ -379,3 +379,29 @@ function bulletRaycaster(bulletMesh){
     return false;
 
 }
+
+
+const width = ground.geometry.parameters.width;
+const height = ground.geometry.parameters.height;
+// const width = 10;
+// const height = 10;
+
+const spacing = [1, 1.5, 2];
+
+// console.log(width, height);
+
+function grassSpawn(){
+
+    for (let x = 0; x < width; x += spacing[Math.floor(Math.random() * spacing.length)]){
+        for (let z = 0; z < height; z += spacing[Math.floor(Math.random() * spacing.length)]){
+
+            const grass = new THREE.Mesh(
+                new THREE.BoxGeometry(0.02, 0.1, 0.02),
+                new THREE.MeshBasicMaterial({color: 0xff4444})
+            );
+
+            grass.position.set(x, -0.9, z);
+            scene.add(grass);
+        }
+    }
+}

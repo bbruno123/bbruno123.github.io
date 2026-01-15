@@ -82,11 +82,12 @@ canvas {
     padding-bottom: 5px;
 
     font-size: 20px;
-    
-    display: flex;
-    flex-direction: column;
-    
+        
     color: white;
+}
+
+#wave {
+    text-align: right;
 }
 
 #game_over {

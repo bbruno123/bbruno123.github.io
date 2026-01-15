@@ -3,10 +3,13 @@ import * as THREE from 'https://unpkg.com/three@0.168.0/build/three.module.js';
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+const renderer = new THREE.WebGLRenderer({antialias: true});
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 document.body.appendChild(renderer.domElement);
+
+//Abilita sombras
+renderer.shadowMap.enabled = true;
 
 // Atualizar tamanho quando a janela redimensionar
 window.addEventListener('resize', () => {
@@ -33,16 +36,26 @@ function update(){
     
     const deltaTime = clock.getDelta();
 
+        obstacleSpawn();
+        grassSpawn();
+
     //Verifica se o usuário clico usando o 'isPointerLock'
     if (isPointerLock === true && gameOver === false){
         WASD(deltaTime);
         shoot(deltaTime);
         rotateX();
-        gravity(deltaTime);
+
+        if (noClip === false){
+            gravity(deltaTime);
+            jump_();
+
+        }else{
+            //NoClip mode ativo
+        }
+
         onGround();
         debugMenuStatus();
         updateDebugUI();
-        jump_(deltaTime);
         spawnEnemies();
         enemiesWave(deltaTime);
         enemiesMove(deltaTime);
@@ -51,18 +64,37 @@ function update(){
         rotationCube();
         cubeRGB(deltaTime);
         enemyShoot(deltaTime);
-        obstacleSpawn();
 
         cube_rotation.innerText = cubeRotation;
         cube_color_RGB.innerText = cubeColorRGB;
+
+        bullet_light.innerText = bulletLight;
         
+        //Inicia o jogo
         startGame = true;
+
+        //Adiciona ou remove 'PointLight' para a bala
+        if (bulletLight === true){
+            bullet.add(pointLight);
+
+        }else{
+            bullet.remove(pointLight);
+        }
 
         //Esconde o 'pausedText'
         pausedText.classList.add("hidden");
         
         playerHealth.innerText = `Vida: ${player.userData.health}`;
+
         waveUI.innerText = `Wave: ${waveRound}`;
+        nextWaveTimerUI.innerText = `Próxima Wave em: ${(nextWaveTimer.toFixed(0))}s`;
+
+        if (nextWave === true){
+            nextWaveTimerUI.classList.remove("hidden");
+
+        }else{
+            nextWaveTimerUI.classList.add("hidden");
+        }
         
     }else{
         
@@ -99,12 +131,15 @@ const coordsElement = document.querySelector("#coords");
 const cube_rotation = document.getElementById("cube_rotation");
 const cube_color_RGB = document.getElementById("cube_color_RGB");
 
+const bullet_light = document.getElementById("bullet_light");
+
 //UI
 const playerHealth = document.getElementById("player_health");
 const playerUI = document.getElementById("player_UI");
 
 const UI = document.getElementById("UI");
 const waveUI = document.getElementById("wave");
+const nextWaveTimerUI = document.getElementById("next_wave_timer");
 
 let debugAtivo = false;
 
@@ -156,8 +191,34 @@ scene.background = new THREE.Color(0x87ceeb);
 let cubeRotation = false;
 let cubeColorRGB = false;
 
-const ambientLight = new THREE.AmbientLight(0xFFFFFF, 1.5);
-scene.add(ambientLight);
+// const ambientLight = new THREE.AmbientLight(0xFFFFFF, 1.5);
+// scene.add(ambientLight);
+
+const sunLight = new THREE.DirectionalLight(0xFFFFFF, 3);
+sunLight.position.set(100, 80, 200);
+sunLight.castShadow = true;
+scene.add(sunLight);
+
+const sun = new THREE.Mesh(
+    new THREE.PlaneGeometry(30,30),
+    new THREE.MeshBasicMaterial({color: 0xffdd33, side: THREE.DoubleSide})
+);
+
+sun.position.copy(sunLight.position); // Copia a posição da luz
+sun.rotation.y = -50;
+sun.rotation.x = 50;
+scene.add(sun); // Adiciona o sol à cena
+
+// Configurar câmera de sombra
+sunLight.shadow.mapSize.width = 2048;
+sunLight.shadow.mapSize.height = 2048;
+sunLight.shadow.camera.left = -150;
+sunLight.shadow.camera.right = 150;
+sunLight.shadow.camera.top = 150;
+sunLight.shadow.camera.bottom = -150;
+sunLight.shadow.camera.near = 0.5;
+sunLight.shadow.camera.far = 500;
+sunLight.shadow.bias = -0.0001;
 
 const geometryCube = new THREE.BoxGeometry(1, 1, 1);
 const materialCube = new THREE.MeshBasicMaterial({color: 0xfcba03});
@@ -165,27 +226,35 @@ const cube = new THREE.Mesh(geometryCube, materialCube);
 
 //Cria o Mesh do Player
 const player = new THREE.Mesh(
-    new THREE.BoxGeometry(1, 1, 1),
-    new THREE.MeshBasicMaterial({visible: false})
+    new THREE.CapsuleGeometry(0.5, 0.8, 4, 8),
+    new THREE.MeshPhongMaterial({visible: true, opacity: 0})
 );
+player.castShadow = true;
+player.receiveShadow = true;
 
 //Cria o Mesh da Bala
 const bullet = new THREE.Mesh(
     new THREE.BoxGeometry(0.25, 0.25, 0.25),
-    new THREE.MeshBasicMaterial({color: 0xff0000})
+    new THREE.MeshPhongMaterial({color: 0xff0000})
 );
+bullet.castShadow = true;
+bullet.receiveShadow = true;
 
 //Cria o Mesh da Bala do Inimigo
 const enemyBullet = new THREE.Mesh(
     new THREE.BoxGeometry(0.25, 0.25, 0.25),
-    new THREE.MeshBasicMaterial({color: 0x0400ed})
+    new THREE.MeshPhongMaterial({color: 0x0400ed})
 );
+enemyBullet.castShadow = true;
+enemyBullet.receiveShadow = true;
 
 //Cria o Mesh do Chão
 const ground = new THREE.Mesh(
     new THREE.PlaneGeometry(150, 150),
     new THREE.MeshStandardMaterial({color: 0x66ff00, side: THREE.DoubleSide})
 );
+
+ground.receiveShadow = true;
 
 cube.name = "cube";
 ground.name = "ground";
@@ -200,9 +269,8 @@ ground.rotation.x = Math.PI / 2;
 ground.position.y = -1;
 // console.log(ground.position);
 
-//Adiciona 'PointLight' para a bala
-// const pointLight = new THREE.PointLight(0xFFFFFF, 5);
-// bullet.add(pointLight);
+let bulletLight = false;
+const pointLight = new THREE.PointLight(0xFFFFFF, 1);
 
 scene.add(player);
 player.add(camera);
@@ -272,6 +340,8 @@ const forward = new THREE.Vector3();
 const right = new THREE.Vector3();
 const up = new THREE.Vector3();
 
+let noClip = false;
+
 function WASD(deltaTime){
     
     forward.set(0, 0, -1).applyQuaternion(player.quaternion);
@@ -294,10 +364,22 @@ function WASD(deltaTime){
     }
     
     if (shift === true){
-        moveSpeed = 15 * deltaTime;
+
+        if (noClip === true){
+            moveSpeed = 35 * deltaTime;
+
+        }else{
+            moveSpeed = 15 * deltaTime;
+        }
         
     }else{
-        moveSpeed = 8 * deltaTime;
+        
+        if (noClip === true){
+            moveSpeed = 20 * deltaTime;
+
+        }else{
+            moveSpeed = 8 * deltaTime;
+        }
         
     }
     
@@ -306,13 +388,13 @@ function WASD(deltaTime){
 }
 
 let velocityY = 0;
-const jumpForce = 20;
+const jumpForce = 0.2; // Força do pulo
 const gravityForce = 0.5;
 
-function jump_(deltaTime){
+function jump_(){
     
     if (canJump === true && space === true && onGroundBool === true){
-        velocityY = jumpForce * deltaTime;
+        velocityY = jumpForce;
         canJump = false;
     }
 }
@@ -328,7 +410,6 @@ function gravity(deltaTime){
 
             player.position.y = 0;
             velocityY = 0;
-            canJump = false;
 
         }else{
 
@@ -337,7 +418,6 @@ function gravity(deltaTime){
 
                 player.position.set(0, 0, 0);
                 velocityY = 0;
-                canJump = false;
             }
 
         }
@@ -370,8 +450,10 @@ function obstacleSpawn(){
         //Cria o Mesh do obstáculo
         const obstacle = new THREE.Mesh(
             new THREE.BoxGeometry(Math.floor(Math.random() * 5) + 2, Math.floor(Math.random() * 3) + 2, Math.floor(Math.random() * 2) + 2),
-            new THREE.MeshBasicMaterial({color: obstaclesVariations[Math.floor(Math.random() * obstaclesVariations.length)]})
+            new THREE.MeshPhongMaterial({color: obstaclesVariations[Math.floor(Math.random() * obstaclesVariations.length)]})
         );
+        obstacle.castShadow = true;
+        obstacle.receiveShadow = true;
         
         obstacles.push(obstacle);
 
@@ -393,6 +475,64 @@ function obstacleSpawn(){
     
     obstacleSpawned = true;
 
+}
+
+const width = ground.geometry.parameters.width;
+const height = ground.geometry.parameters.height;
+
+const grassHeight = [0.1, 0.13, 0.17, 0.2];
+// const grassColors = [0x00ff00, 0x33ff33, 0x66ff66, 0x99ff99];
+
+let grassSpawned = false;
+
+function grassSpawn(){
+    
+    if (grassSpawned) return;
+    
+    const spacing = 0.5; // Espaçamento entre cada grama
+    const countX = Math.floor(width / spacing);
+    const countZ = Math.floor(height / spacing);
+    const count = countX * countZ;
+    
+    // Cria UM InstancedMesh para TODAS as gramas
+    const grassMesh = new THREE.InstancedMesh(
+        new THREE.BoxGeometry(0.02, grassHeight[Math.floor(Math.random() * grassHeight.length)], 0.02),
+        new THREE.MeshPhongMaterial({color: 0x00ff00}),
+        count
+    );
+    grassMesh.castShadow = true;
+    grassMesh.receiveShadow = true;
+    
+    const matrix = new THREE.Matrix4();
+    const position = new THREE.Vector3();
+    
+    let index = 0;
+    
+    // Distribui a grama por toda área do ground
+    for (let x = -width/2; x < width/2; x += spacing){
+        for (let z = -height/2; z < height/2; z += spacing){
+            
+            if (index >= count) break;
+            
+            const randomHeight = grassHeight[Math.floor(Math.random() * grassHeight.length)];
+            
+            position.set(
+                x + Math.random() * spacing * 0.5,
+                -0.9,
+                z + Math.random() * spacing * 0.5
+            );
+            
+            matrix.identity(); // Reseta a matriz
+            matrix.setPosition(position);
+            matrix.scale(new THREE.Vector3(1, randomHeight / 0.1, 1)); // Escala altura
+            grassMesh.setMatrixAt(index, matrix);
+            
+            index++;
+        }
+    }
+    
+    scene.add(grassMesh);
+    grassSpawned = true;
 }
 
 const raycaster = new THREE.Raycaster();
@@ -517,9 +657,14 @@ let cooldownNextWave = 4;
 
 let qtdEnemiesSpawn = 1;
 
+let nextWave = false;
+
 function enemiesWave(deltaTime){
+    // console.log(nextWaveTimer);
         
     if (enemies.length <= 0){
+
+        nextWave = true;
 
         nextWaveTimer += deltaTime;
 
@@ -540,6 +685,8 @@ function enemiesWave(deltaTime){
             enemiesSpawned = false;
             
         }
+    }else{
+        nextWave = false;
     }
 }
 
@@ -563,8 +710,10 @@ function spawnEnemies(){
 
         const enemy = new THREE.Mesh(
             new THREE.BoxGeometry(1, 2, 1),
-            new THREE.MeshBasicMaterial({color: enemiesVariations[Math.floor(Math.random() * enemiesVariations.length)]})
+            new THREE.MeshPhongMaterial({color: enemiesVariations[Math.floor(Math.random() * enemiesVariations.length)]})
         )
+        enemy.castShadow = true;
+        enemy.receiveShadow = true;
 
         enemy.userData.health = 3;
         enemy.userData.alive = true;
@@ -577,7 +726,7 @@ function spawnEnemies(){
 
         }while (Math.sqrt(x*x + z*z) < 20) //Define a posição para spawn de inimigo longe do player
         
-        enemy.position.set(x, 0, z);
+        enemy.position.set(x, -0.135, z);
 
         // console.log(i);
 
@@ -637,7 +786,6 @@ function checkBulletObstacleCollision(bullet){
     return null; // NÃO ACHOU
 
 }
-
 
 const enemySpeed = 2;
 
@@ -942,10 +1090,20 @@ window.addEventListener("keydown", (event) => {
     if (event.key === "4" && debugAtivo === true){
         cubeColorRGB = !cubeColorRGB;
     }
+    
+    //Adiciona luz a bala do player//
+    if (event.key === "5" && debugAtivo === true){
+        bulletLight = !bulletLight;
+    }
 
     //Recarrega a página//
-    if (event.key.toLowerCase() === "p" && !event.repeat){
+    if (event.key.toLowerCase() === "r" && !event.repeat){
         location.reload();
+    }
+
+    //noClip Mode//
+    if (event.key.toLowerCase() === "n" && debugAtivo === true){
+        noClip = !noClip;
     }
 
     //WASD
