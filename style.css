@@ -42,21 +42,19 @@ body {
     padding: 30px 120px;
 }
 
-.my_projects li {
-    background-color: rgba(128, 128, 128, 0.149);
-    padding: 3px 15px;
-    border-radius: 10px;
-}
-
-.my_projects li:hover {
-    background-color: rgba(128, 128, 128, 0.408);
-    padding: 3px 15px;
-    border-radius: 10px;
-}
-
 .my_projects a {
     text-decoration: none;
     color: black;
 
     font-size: 25px;
+
+    background-color: rgba(128, 128, 128, 0.149);
+    padding: 3px 15px;
+    border-radius: 10px;
+}
+
+.my_projects a:hover {
+    background-color: rgba(128, 128, 128, 0.408);
+    padding: 3px 15px;
+    border-radius: 10px;
 }
