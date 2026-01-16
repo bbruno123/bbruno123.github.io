@@ -195,7 +195,7 @@ let cubeColorRGB = false;
 // scene.add(ambientLight);
 
 const sunLight = new THREE.DirectionalLight(0xFFFFFF, 3);
-sunLight.position.set(100, 80, 200);
+sunLight.position.set(100, 80, -250);
 sunLight.castShadow = true;
 scene.add(sunLight);
 
@@ -205,8 +205,7 @@ const sun = new THREE.Mesh(
 );
 
 sun.position.copy(sunLight.position); // Copia a posição da luz
-sun.rotation.y = -50;
-sun.rotation.x = 50;
+sun.lookAt(0, 0, 0); // Faz o sol olhar para o centro da cena
 scene.add(sun); // Adiciona o sol à cena
 
 // Configurar câmera de sombra
@@ -344,9 +343,21 @@ let noClip = false;
 
 function WASD(deltaTime){
     
-    forward.set(0, 0, -1).applyQuaternion(player.quaternion);
-    right.set(1, 0, 0).applyQuaternion(player.quaternion);
-    up.set(0, 1, 0);
+    if (noClip === true){
+
+         // NoClip: segue a direção da câmera
+        camera.getWorldDirection(forward);
+        right.set(1, 0, 0).applyQuaternion(player.quaternion);
+        up.set(0, 1, 0);
+
+    }else{
+
+        // Normal: segue a direção do player
+        forward.set(0, 0, -1).applyQuaternion(player.quaternion);
+        right.set(1, 0, 0).applyQuaternion(player.quaternion);
+        up.set(0, 1, 0);
+
+    }
     
     const move = new THREE.Vector3();
     
