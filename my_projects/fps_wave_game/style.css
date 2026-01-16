@@ -90,6 +90,10 @@ canvas {
     text-align: right;
 }
 
+.spacing_bottom {
+    margin-bottom: 10px;
+}
+
 #game_over {
     position: absolute;
     

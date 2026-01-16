@@ -69,6 +69,8 @@ function update(){
         cube_color_RGB.innerText = cubeColorRGB;
 
         bullet_light.innerText = bulletLight;
+
+        no_clip_mode.innerText = noClip;
         
         //Inicia o jogo
         startGame = true;
@@ -132,6 +134,8 @@ const cube_rotation = document.getElementById("cube_rotation");
 const cube_color_RGB = document.getElementById("cube_color_RGB");
 
 const bullet_light = document.getElementById("bullet_light");
+
+const no_clip_mode = document.getElementById("no_clip_mode");
 
 //UI
 const playerHealth = document.getElementById("player_health");
@@ -398,6 +402,17 @@ function WASD(deltaTime){
     player.position.add(move);
 }
 
+function obstacleCollision(){
+
+    for (let i = 0; i < obstacles.length; i++){
+    //     const obstacle = obstacles[i];
+
+    //     raycaster.set(player.)
+    //     const intersects = raycaster.intersectObject(obstacle, true);
+    }
+
+}
+
 let velocityY = 0;
 const jumpForce = 0.2; // Força do pulo
 const gravityForce = 0.5;
@@ -430,10 +445,8 @@ function gravity(deltaTime){
                 player.position.set(0, 0, 0);
                 velocityY = 0;
             }
-
         }
-    }
-    
+    } 
 }
 
 let obstacles = [];
@@ -479,7 +492,6 @@ function obstacleSpawn(){
         }while (Math.sqrt(x*x + z*z) < 10) //Define a posição para spawn do obstáculo longe do player
         
         obstacle.position.set(x, 0, z);
-
         scene.add(obstacle);
 
     }
