@@ -12,8 +12,8 @@
         <p id="paused" class="hidden">Pausado</p>
         <p id="game_over" class="hidden">Game Over</p>
 
-        <div id="debug_ui" class="hidden">
-            <span class="spacing_bottom">Cords: <span id="coords"></span></span>
+        <div id="debug_ui" class="hidden background">
+            <span style="margin-bottom: 10px;">Cords: <span id="coords"></span></span>
 
             <span>cubeRotation: <span id="cube_rotation"></span></span>
             <span>cubeColorRGB: <span id="cube_color_RGB"></span></span>
@@ -21,13 +21,13 @@
             <span>noClipMode: <span id="no_clip_mode"></span></span>
         </div>
 
-        <div id="UI" class="hidden">
-            <p id="wave"></p>
-            <p id="next_wave_timer" class="hidden"></p>
+        <div id="UI" class="hidden ">
+            <span class="background" id="wave"></span>
+            <span class="background" id="next_wave_timer" class="hidden"></span>
         </div>
 
-        <div id="player_UI" class="hidden">
-            <p id="player_health"></p>
+        <div id="player_UI" class="hidden background">
+            <span>Vida:</span> <span style="color: limegreen;" id="player_health"></span>
         </div>
 
     </body>

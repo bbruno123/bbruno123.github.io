@@ -48,17 +48,36 @@ canvas {
     color: white;
 }
 
+#debug_ui{
+    padding: 5px 5px;
+}
+
 /*tem que ficar acima de '#debug_ui > span'*/
 #debug_ui span {
-    padding-left: 10px;
+    padding-left: 2px;
 }
 
 #debug_ui > span {
     background-color: rgba(136, 136, 136, 0.329);
     
-    padding: 0px 4px 0px 1px;
+    padding: 0px 4px;
+    margin-bottom: 2px;
+
+    border-radius: 5px;
     
     width: fit-content;
+}
+
+.green{
+    color: limegreen;
+}
+
+.red {
+    color: red;
+}
+
+.bold {
+    font-weight: bold;
 }
 
 #player_UI{
@@ -77,22 +96,33 @@ canvas {
     right: 10px;
 }
 
-#player_UI p, #UI p {
+#player_UI span, #UI span {
     margin: 0px;
-    padding-bottom: 5px;
+    margin-bottom: 5px;
 
     font-size: 20px;
         
     color: white;
+
+    font-weight: bold;
 }
 
-#wave {
-    text-align: right;
+#UI {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
+.background {
+    background-color: rgba(0, 0, 0, 0.494);
+    padding: 1px 5px;
+    border-radius: 5px;
+}
+
+/* 
 .spacing_bottom {
     margin-bottom: 10px;
-}
+} */
 
 #game_over {
     position: absolute;

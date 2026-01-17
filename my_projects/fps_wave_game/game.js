@@ -71,6 +71,44 @@ function update(){
         bullet_light.innerText = bulletLight;
 
         no_clip_mode.innerText = noClip;
+
+        //Gerencia as cores do 'true' ou 'false' para 'limegreen' e 'red' respectivamente//
+
+        //cubeRotation//
+        if (cubeRotation === true){
+            cube_rotation.classList.add("green");
+            cube_rotation.classList.remove("red");
+        }else{
+            cube_rotation.classList.add("red");
+            cube_rotation.classList.remove("green");
+        }
+
+        //cubeColorRGB//
+        if (cubeColorRGB === true){
+            cube_color_RGB.classList.add("green");
+            cube_color_RGB.classList.remove("red");
+        }else{
+            cube_color_RGB.classList.add("red");
+            cube_color_RGB.classList.remove("green");
+        }
+
+        //bulletLight//
+        if (bulletLight === true){
+            bullet_light.classList.add("green");
+            bullet_light.classList.remove("red");
+        }else{
+            bullet_light.classList.add("red");
+            bullet_light.classList.remove("green");
+        }
+
+        //noClip//
+        if (noClip === true){
+            no_clip_mode.classList.add("green");
+            no_clip_mode.classList.remove("red");
+        }else{
+            no_clip_mode.classList.add("red");
+            no_clip_mode.classList.remove("green");
+        }
         
         //Inicia o jogo
         startGame = true;
@@ -86,10 +124,10 @@ function update(){
         //Esconde o 'pausedText'
         pausedText.classList.add("hidden");
         
-        playerHealth.innerText = `Vida: ${player.userData.health}`;
+        playerHealth.innerText = `${player.userData.health}`;
 
-        waveUI.innerText = `Wave: ${waveRound}`;
-        nextWaveTimerUI.innerText = `Próxima Wave em: ${(nextWaveTimer.toFixed(0))}s`;
+        waveUI.innerHTML = `Wave: <span style="color: yellow;">${waveRound}</span>`;
+        nextWaveTimerUI.innerHTML = `Próxima Wave em: <span style="color: yellow;">${(nextWaveTimer.toFixed(0))}</span>s`;
 
         if (nextWave === true){
             nextWaveTimerUI.classList.remove("hidden");
@@ -185,7 +223,7 @@ function UI_(){
 
 //Pega as coordenadas//
 function updateDebugUI(){
-    coordsElement.innerText = `x: ${player.position.x.toFixed(2)}` + " | " + `y: ${player.position.y.toFixed(2)}` + " | " + `z: ${player.position.z.toFixed(2)}`;
+    coordsElement.innerHTML = `<span style="color: red;">x</span>: ${player.position.x.toFixed(2)}` + " | " + `<span style="color: limegreen;">y</span>: ${player.position.y.toFixed(2)}` + " | " + `<span style="color: blue;">z</span>: ${player.position.z.toFixed(2)}`;
 }
 
 //Cor da Skybox//
@@ -199,7 +237,11 @@ let cubeColorRGB = false;
 // scene.add(ambientLight);
 
 const sunLight = new THREE.DirectionalLight(0xFFFFFF, 3);
-sunLight.position.set(100, 80, -250);
+// sunLight.position.set(100, 80, -250);
+
+//Randomiza a posição do 'sunLight' no eixo x e z, entre 0 a 100 e 0 a -250 respectivamente
+sunLight.position.set(Math.floor(Math.random() * 100), 80, Math.floor(Math.random() * -250));
+// console.log(sunLight.position);
 sunLight.castShadow = true;
 scene.add(sunLight);
 
@@ -237,16 +279,18 @@ player.receiveShadow = true;
 
 //Cria o Mesh da Bala
 const bullet = new THREE.Mesh(
-    new THREE.BoxGeometry(0.25, 0.25, 0.25),
-    new THREE.MeshPhongMaterial({color: 0xff0000})
+    // new THREE.BoxGeometry(0.25, 0.25, 0.25),
+    new THREE.SphereGeometry(0.1, 8, 8),
+    new THREE.MeshPhongMaterial({color: 0xffff00})
 );
 bullet.castShadow = true;
 bullet.receiveShadow = true;
 
 //Cria o Mesh da Bala do Inimigo
 const enemyBullet = new THREE.Mesh(
-    new THREE.BoxGeometry(0.25, 0.25, 0.25),
-    new THREE.MeshPhongMaterial({color: 0x0400ed})
+    // new THREE.BoxGeometry(0.25, 0.25, 0.25),
+    new THREE.SphereGeometry(0.1, 8, 8),
+    new THREE.MeshPhongMaterial({color: 0xffff00})
 );
 enemyBullet.castShadow = true;
 enemyBullet.receiveShadow = true;
@@ -400,17 +444,6 @@ function WASD(deltaTime){
     
     move.multiplyScalar(moveSpeed);
     player.position.add(move);
-}
-
-function obstacleCollision(){
-
-    for (let i = 0; i < obstacles.length; i++){
-    //     const obstacle = obstacles[i];
-
-    //     raycaster.set(player.)
-    //     const intersects = raycaster.intersectObject(obstacle, true);
-    }
-
 }
 
 let velocityY = 0;
