@@ -47,16 +47,16 @@ window.addEventListener("keydown", (event) => {
 
     if (turns > 2){
         if (operator === "+"){
-            display.value = Number(num1) + Number(num2);
+            display.value = Number(num1) += Number(num2);
 
         }else if (operator === "-"){
-            display.value = Number(num1) - Number(num2);
+            display.value = Number(num1) -= Number(num2);
 
         }else if (operator === "*"){
-            display.value = Number(num1) * Number(num2);
+            display.value = Number(num1) *= Number(num2);
 
         }else if (operator === "/"){
-            display.value = Number(num1) / Number(num2);
+            display.value = Number(num1) /= Number(num2);
         }
 
         turns = 0;
@@ -67,16 +67,16 @@ window.addEventListener("keydown", (event) => {
         if (event.key === "Enter" && !event.repeat){
 
             if (operator === "+"){
-                display.value = Number(num1) + Number(num2);
+                display.value = Number(num1) += Number(num2);
     
             }else if (operator === "-"){
-                display.value = Number(num1) - Number(num2);
+                display.value = Number(num1) -= Number(num2);
     
             }else if (operator === "*"){
-                display.value = Number(num1) * Number(num2);
+                display.value = Number(num1) *= Number(num2);
     
             }else if (operator === "/"){
-                display.value = Number(num1) / Number(num2);
+                display.value = Number(num1) /= Number(num2);
             }
 
             turns = 0;
