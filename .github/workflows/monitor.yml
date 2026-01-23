@@ -1,7 +1,7 @@
 name: News Monitor 30s
 on:
   schedule:
-    - cron: '*/1 * * * *'  # a cada 1 minuto (30s não é possível)
+    - cron: '*/5 * * * *'   # GitHub só garante execução >= 5 em 5 min
   workflow_dispatch:  # botão manual
 
 jobs:
@@ -30,13 +30,7 @@ jobs:
         MONITOR_DB: ./monitor.sqlite3
         MONITOR_LOG: ./monitor.log
       run: |
-        END_TIME=$(($(date +%s) + 60))
-        while [ $(date +%s) -lt $END_TIME ]; do
-          echo "===== Executando ciclo ====="
-          python3 news_monitor/monitor_universal.py
-          echo "Aguardando 30 segundos..."
-          sleep 30
-        done
+        python3 news_monitor/monitor_universal.py
         
     - name: Upload logs
       uses: actions/upload-artifact@v4
