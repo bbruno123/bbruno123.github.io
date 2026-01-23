@@ -22,14 +22,15 @@ jobs:
         python3 -m pip install -r news_alert_script/news_monitor/requirements.txt tzdata
     
     - name: Run monitor
+      working-directory: news_alert_script
       env:
         ALERT_TO: ryanfabres@gmail.com
         GMAIL_USER: bruno.spams.email@gmail.com
         GMAIL_APP_PASSWORD: teste
-        MONITOR_DB: ./news_alert_script/monitor.sqlite3
-        MONITOR_LOG: ./news_alert_script/monitor.log
+        MONITOR_DB: ./monitor.sqlite3
+        MONITOR_LOG: ./monitor.log
       run: |
-        python3 news_alert_script/news_monitor/monitor_universal.py
+        python3 news_monitor/monitor_universal.py
         
     - name: Upload logs
       uses: actions/upload-artifact@v4
