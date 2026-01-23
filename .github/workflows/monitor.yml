@@ -1,7 +1,7 @@
 name: News Monitor 30s
 on:
   schedule:
-    - cron: '*/1 * * * *'  # a cada 1 minuto (30s não é possível)
+    - cron: '0 * * * *'  # a cada hora
   workflow_dispatch:  # botão manual
 
 jobs:
