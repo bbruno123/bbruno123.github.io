@@ -1,12 +1,13 @@
 name: News Monitor 30s
 on:
   schedule:
-    - cron: '*/1 * * * *'  # 1min (GitHub limita)
-  workflow_dispatch:
+    - cron: '*/1 * * * *'  # a cada 1 minuto (30s não é possível)
+  workflow_dispatch:  # botão manual
+
 jobs:
   monitor:
     runs-on: ubuntu-latest
-    timeout-minutes: 1
+    timeout-minutes: 2
     steps:
     - uses: actions/checkout@v4
     
@@ -18,22 +19,23 @@ jobs:
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
-        python3 -m pip install requests beautifulsoup4 feedparser python-dateutil tzdata
+        python3 -m pip install -r news_alert_script/news_monitor/requirements.txt tzdata
     
     - name: Run monitor
       env:
         ALERT_TO: ryanfabres@gmail.com
         GMAIL_USER: bruno.spams.email@gmail.com
         GMAIL_APP_PASSWORD: teste
-        MONITOR_DB: ./monitor.sqlite3
-        MONITOR_LOG: ./monitor.log
-      run: python3 news_alert_script/news_monitor/monitor_universal.py
-      
+        MONITOR_DB: ./news_alert_script/monitor.sqlite3
+        MONITOR_LOG: ./news_alert_script/monitor.log
+      run: |
+        python3 news_alert_script/news_monitor/monitor_universal.py
+        
     - name: Upload logs
       uses: actions/upload-artifact@v4
       if: always()
       with:
         name: monitor-logs
         path: |
-          monitor.log
-          monitor.sqlite3
+          news_alert_script/monitor.log
+          news_alert_script/cron.log
