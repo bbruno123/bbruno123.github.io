@@ -1,9 +1,0 @@
-name: Keep Alive
-on:
-  schedule:
-    - cron: '0 0 * * *'  # 1x por dia
-jobs:
-  ping:
-    runs-on: ubuntu-latest
-    steps:
-    - run: echo "Repo vivo"

@@ -1,55 +1,222 @@
-2026-01-22 10:46:59,502 INFO ===== ciclo iniciado =====
-2026-01-22 10:46:59,503 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-22T10:46:59.486502-03:00
-2026-01-22 10:47:02,306 INFO [Melhores Destinos] analisados=10 nao_hoje=10 sem_data=0 notificados=0
-2026-01-22 10:47:03,360 INFO [Passageiro de Primeira] analisados=30 nao_hoje=24 sem_data=0 notificados=0
-2026-01-22 10:47:03,361 INFO RESUMO: analisados=40 nao_hoje=34 sem_data=0 notificados=0
-2026-01-22 10:47:03,361 INFO ===== ciclo finalizado =====
-2026-01-22 10:49:13,004 INFO ===== ciclo iniciado =====
-2026-01-22 10:49:13,004 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-22T10:49:13.003277-03:00
-2026-01-22 10:49:14,834 INFO [Melhores Destinos] analisados=10 nao_hoje=10 sem_data=0 notificados=0
-2026-01-22 10:49:18,608 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/smiles-oferece-passagens-aereas-a-partir-de-7-500-milhas-taxas-por-trecho/
-2026-01-22 10:49:18,608 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/prorrogado-azul-fidelidade-oferece-ate-350-de-bonus-na-compra-de-pontos-2/
-2026-01-22 10:49:18,609 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/viajantes-com-ingressos-para-a-copa-do-mundo-terao-prioridade-no-agendamento-da-entrevista-do-visto-americano/
-2026-01-22 10:49:18,609 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/air-europa-oferece-voos-de-ida-e-volta-a-partir-de-r-3-251/
-2026-01-22 10:49:18,609 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/corre-mercado-livre-oferece-cupom-de-ate-r-200-off-em-compras-4/
-2026-01-22 10:49:18,609 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/ultimo-dia-para-liberar-os-pontos-da-promocao-bateu-ganhou-do-santander/
-2026-01-22 10:49:18,609 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/chegou-a-expomilhas-by-pp-garanta-ja-o-seu-ingresso/
-2026-01-22 10:49:18,610 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/voe-para-miami-a-partir-de-r-967-ou-34-mil-milhas-latam-pass-taxas-por-trecho/
-2026-01-22 10:49:18,610 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/aeroporto-do-recife-recebe-investimento-de-r-60-milhoes-para-reformas-no-terminal-intermodal/
-2026-01-22 10:49:18,610 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/50-anos-de-concorde-air-france-volta-no-tempo-e-relembra-operacoes-com-jato-supersonico/
-2026-01-22 10:49:18,610 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/volta-as-aulas-material-escolar-com-ate-40-de-desconto-no-mercado-livre/
-2026-01-22 10:49:18,611 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/aviacao-brasileira-registra-melhor-ano-da-historia-em-2025/
-2026-01-22 10:49:18,611 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/carnaval-em-ouro-preto-hospedagens-a-partir-de-r-427-8-off-com-nosso-cupom-exclusivo-da-hoteis-com/
-2026-01-22 10:49:18,611 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/guia-salas-vip-guarulhos/
-2026-01-22 10:49:18,611 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/aproveite-este-verao-e-ainda-acumule-pontos-esfera/
-2026-01-22 10:49:18,611 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/roda-rico-promove-acao-solidaria-e-brincadeiras-ao-ar-livre-durante-o-aniversario-de-sao-paulo/
-2026-01-22 10:49:18,612 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/esfera-oferece-ate-5-pontos-por-real-gasto-no-extra-10/
-2026-01-22 10:49:18,612 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/livelo-oferece-ate-54-de-desconto-na-compra-de-pontos-9/
-2026-01-22 10:49:18,612 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/azul-suspendera-voos-de-curitiba-para-assuncao-e-montevideu-a-partir-de-marco-de-2026/
-2026-01-22 10:49:18,612 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/voe-para-los-angeles-a-partir-de-r-1-045-ou-37-mil-milhas-latam-pass-taxas-por-trecho/
-2026-01-22 10:49:18,612 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/itens-variados-com-ate-58-de-desconto-na-amazon-4/
-2026-01-22 10:49:18,613 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/ate-amanha-ganhe-ate-10-pontos-livelo-por-real-no-seguro-viagem-da-hero-2/
-2026-01-22 10:49:18,613 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/bradesco-principal-valet-gratuito-iguatemi-amex/
-2026-01-22 10:49:18,613 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/anac-vai-revisar-regras-sobre-direitos-e-deveres-dos-passageiros/
-2026-01-22 10:49:18,613 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/volta-as-aulas-da-udm-aproveite-40-off-no-mundo-avios-dominando-o-seats-aero-e-mais/
-2026-01-22 10:49:18,613 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/festival-de-pontos-livelo-ganhe-ate-12-pontos-por-real-gasto-na-elbo-riachuelo-ca-e-outros-parceiros/
-2026-01-22 10:49:18,614 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/melhor-forma-de-comprar-iphone/
-2026-01-22 10:49:18,614 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/qantas-anuncia-aumento-nos-resgates-com-a-emirates-e-limita-primeira-classe-a-clientes-com-status/
-2026-01-22 10:49:18,614 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/transfira-pontos-livelo-para-o-azul-fidelidade-usando-pontos-dinheiro-milheiro-a-partir-de-r-1251/
-2026-01-22 10:49:18,615 INFO [Passageiro de Primeira (RSS)] sem data confiável (RSS) -> https://passageirodeprimeira.com/lufthansa-voo-inaugural-boeing-787-9-pintura-100-anos-rio/
-2026-01-22 10:49:18,615 INFO [Passageiro de Primeira] analisados=30 nao_hoje=0 sem_data=30 notificados=0
-2026-01-22 10:49:18,616 INFO RESUMO: analisados=40 nao_hoje=10 sem_data=30 notificados=0
-2026-01-22 10:49:18,616 INFO ===== ciclo finalizado =====
-2026-01-23 09:59:04,172 INFO ===== ciclo iniciado =====
-2026-01-23 09:59:04,173 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T09:59:04.164095-03:00
-2026-01-23 09:59:06,725 INFO [Melhores Destinos] analisados=10 nao_hoje=10 sem_data=0 notificados=0
-2026-01-23 09:59:11,996 INFO [Passageiro de Primeira (RSS)] NOTIFICADO: Turkish Airlines tem voos de ida e volta para destinos internacionais a partir de US$ 999 -> https://passageirodeprimeira.com/turkish-airlines-tem-voos-de-ida-e-volta-para-destinos-internacionais-a-partir-de-us-999/
-2026-01-23 09:59:12,000 INFO [Passageiro de Primeira] analisados=30 nao_hoje=26 sem_data=0 notificados=1
-2026-01-23 09:59:12,000 INFO RESUMO: analisados=40 nao_hoje=36 sem_data=0 notificados=1
-2026-01-23 09:59:12,000 INFO ===== ciclo finalizado =====
-2026-01-23 13:32:39,104 INFO ===== ciclo iniciado =====
-2026-01-23 13:32:39,104 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T10:32:39.102914-03:00
-2026-01-23 13:32:41,701 INFO [Melhores Destinos] analisados=10 nao_hoje=10 sem_data=0 notificados=0
-2026-01-23 13:32:42,384 INFO [Passageiro de Primeira] analisados=30 nao_hoje=25 sem_data=0 notificados=0
-2026-01-23 13:32:42,384 INFO RESUMO: analisados=40 nao_hoje=35 sem_data=0 notificados=0
-2026-01-23 13:32:42,385 INFO ===== ciclo finalizado =====
+2026-01-23 19:45:51,814 INFO ===== ciclo iniciado =====
+2026-01-23 19:45:51,817 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T16:45:51.813635-03:00
+2026-01-23 19:45:54,105 INFO [Melhores Destinos] analisados=10 nao_hoje=10 sem_data=0 notificados=0
+2026-01-23 19:45:54,744 INFO [Passageiro de Primeira] analisados=30 nao_hoje=12 sem_data=0 notificados=0
+2026-01-23 19:45:54,744 INFO RESUMO: analisados=40 nao_hoje=22 sem_data=0 notificados=0
+2026-01-23 19:45:54,744 INFO ===== ciclo finalizado =====
+2026-01-23 19:47:16,912 INFO ===== ciclo iniciado =====
+2026-01-23 19:47:16,913 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T16:47:16.912316-03:00
+2026-01-23 19:47:19,162 INFO [Melhores Destinos] analisados=10 nao_hoje=10 sem_data=0 notificados=0
+2026-01-23 19:47:19,591 INFO [Passageiro de Primeira] analisados=30 nao_hoje=12 sem_data=0 notificados=0
+2026-01-23 19:47:19,591 INFO RESUMO: analisados=40 nao_hoje=22 sem_data=0 notificados=0
+2026-01-23 19:47:19,592 INFO ===== ciclo finalizado =====
+2026-01-23 19:49:33,666 INFO ===== ciclo iniciado =====
+2026-01-23 19:49:33,667 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T16:49:33.666446-03:00
+2026-01-23 19:49:35,574 INFO [Melhores Destinos] analisados=10 nao_hoje=10 sem_data=0 notificados=0
+2026-01-23 19:49:36,218 INFO [Passageiro de Primeira] analisados=30 nao_hoje=12 sem_data=0 notificados=0
+2026-01-23 19:49:36,218 INFO RESUMO: analisados=40 nao_hoje=22 sem_data=0 notificados=0
+2026-01-23 19:49:36,218 INFO ===== ciclo finalizado =====
+2026-01-23 19:49:51,455 INFO ===== ciclo iniciado =====
+2026-01-23 19:49:51,455 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T16:49:51.455161-03:00
+2026-01-23 19:49:53,543 INFO [Melhores Destinos] analisados=10 nao_hoje=10 sem_data=0 notificados=0
+2026-01-23 19:49:53,987 INFO [Passageiro de Primeira] analisados=30 nao_hoje=12 sem_data=0 notificados=0
+2026-01-23 19:49:53,987 INFO RESUMO: analisados=40 nao_hoje=22 sem_data=0 notificados=0
+2026-01-23 19:49:53,988 INFO ===== ciclo finalizado =====
+2026-01-23 19:54:13,582 INFO ===== ciclo iniciado =====
+2026-01-23 19:54:13,582 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T16:54:13.581921-03:00
+2026-01-23 19:54:15,723 INFO [Melhores Destinos] analisados=10 nao_hoje=10 sem_data=0 notificados=0
+2026-01-23 19:54:16,473 INFO [Passageiro de Primeira] analisados=30 nao_hoje=12 sem_data=0 notificados=0
+2026-01-23 19:54:16,473 INFO RESUMO: analisados=40 nao_hoje=22 sem_data=0 notificados=0
+2026-01-23 19:54:16,474 INFO ===== ciclo finalizado =====
+2026-01-23 19:54:34,765 INFO ===== ciclo iniciado =====
+2026-01-23 19:54:34,765 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T16:54:34.764812-03:00
+2026-01-23 19:54:36,856 INFO [Melhores Destinos] analisados=10 nao_hoje=10 sem_data=0 notificados=0
+2026-01-23 19:54:37,526 INFO [Passageiro de Primeira] analisados=30 nao_hoje=12 sem_data=0 notificados=0
+2026-01-23 19:54:37,526 INFO RESUMO: analisados=40 nao_hoje=22 sem_data=0 notificados=0
+2026-01-23 19:54:37,527 INFO ===== ciclo finalizado =====
+2026-01-23 19:55:48,444 INFO ===== ciclo iniciado =====
+2026-01-23 19:55:48,445 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T16:55:48.444526-03:00
+2026-01-23 19:55:50,426 INFO [Melhores Destinos] analisados=10 nao_hoje=10 sem_data=0 notificados=0
+2026-01-23 19:55:51,102 INFO [Passageiro de Primeira] analisados=30 nao_hoje=12 sem_data=0 notificados=0
+2026-01-23 19:55:51,102 INFO RESUMO: analisados=40 nao_hoje=22 sem_data=0 notificados=0
+2026-01-23 19:55:51,103 INFO ===== ciclo finalizado =====
+2026-01-23 19:56:24,237 INFO ===== ciclo iniciado =====
+2026-01-23 19:56:24,237 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T16:56:24.236990-03:00
+2026-01-23 19:56:26,218 INFO [Melhores Destinos] analisados=10 nao_hoje=10 sem_data=0 notificados=0
+2026-01-23 19:56:26,886 INFO [Passageiro de Primeira] analisados=30 nao_hoje=12 sem_data=0 notificados=0
+2026-01-23 19:56:26,886 INFO RESUMO: analisados=40 nao_hoje=22 sem_data=0 notificados=0
+2026-01-23 19:56:26,887 INFO ===== ciclo finalizado =====
+2026-01-23 19:57:06,412 INFO ===== ciclo iniciado =====
+2026-01-23 19:57:06,412 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T16:57:06.412135-03:00
+2026-01-23 19:57:08,205 INFO [Melhores Destinos] analisados=10 nao_hoje=10 sem_data=0 notificados=0
+2026-01-23 19:57:08,610 INFO [Passageiro de Primeira] analisados=30 nao_hoje=12 sem_data=0 notificados=0
+2026-01-23 19:57:08,610 INFO RESUMO: analisados=40 nao_hoje=22 sem_data=0 notificados=0
+2026-01-23 19:57:08,610 INFO ===== ciclo finalizado =====
+2026-01-23 19:57:26,885 INFO ===== ciclo iniciado =====
+2026-01-23 19:57:26,885 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T16:57:26.884989-03:00
+2026-01-23 19:57:28,834 INFO [Melhores Destinos] analisados=10 nao_hoje=10 sem_data=0 notificados=0
+2026-01-23 19:57:29,503 INFO [Passageiro de Primeira] analisados=30 nao_hoje=12 sem_data=0 notificados=0
+2026-01-23 19:57:29,503 INFO RESUMO: analisados=40 nao_hoje=22 sem_data=0 notificados=0
+2026-01-23 19:57:29,503 INFO ===== ciclo finalizado =====
+2026-01-23 19:58:08,924 INFO ===== ciclo iniciado =====
+2026-01-23 19:58:08,925 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T16:58:08.924476-03:00
+2026-01-23 19:58:11,056 INFO [Melhores Destinos] analisados=10 nao_hoje=10 sem_data=0 notificados=0
+2026-01-23 19:58:11,731 INFO [Passageiro de Primeira] analisados=30 nao_hoje=12 sem_data=0 notificados=0
+2026-01-23 19:58:11,732 INFO RESUMO: analisados=40 nao_hoje=22 sem_data=0 notificados=0
+2026-01-23 19:58:11,732 INFO ===== ciclo finalizado =====
+2026-01-23 20:08:44,082 INFO ===== ciclo iniciado =====
+2026-01-23 20:08:44,082 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:08:44.081708-03:00
+2026-01-23 20:08:46,132 INFO [Melhores Destinos] analisados=10 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 20:08:46,570 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:08:46,570 INFO RESUMO: analisados=40 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:08:46,570 INFO ===== ciclo finalizado =====
+2026-01-23 20:09:04,946 INFO ===== ciclo iniciado =====
+2026-01-23 20:09:04,946 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:09:04.945784-03:00
+2026-01-23 20:09:05,359 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 20:09:06,032 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:09:06,033 INFO RESUMO: analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:09:06,033 INFO ===== ciclo finalizado =====
+2026-01-23 20:09:24,332 INFO ===== ciclo iniciado =====
+2026-01-23 20:09:24,333 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:09:24.332072-03:00
+2026-01-23 20:09:24,914 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 20:09:25,601 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:09:25,602 INFO RESUMO: analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:09:25,602 INFO ===== ciclo finalizado =====
+2026-01-23 20:09:43,872 INFO ===== ciclo iniciado =====
+2026-01-23 20:09:43,872 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:09:43.872385-03:00
+2026-01-23 20:09:44,390 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 20:09:45,061 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:09:45,061 INFO RESUMO: analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:09:45,061 INFO ===== ciclo finalizado =====
+2026-01-23 20:10:03,340 INFO ===== ciclo iniciado =====
+2026-01-23 20:10:03,340 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:10:03.340237-03:00
+2026-01-23 20:10:03,879 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 20:10:04,527 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:10:04,527 INFO RESUMO: analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:10:04,527 INFO ===== ciclo finalizado =====
+2026-01-23 20:10:22,819 INFO ===== ciclo iniciado =====
+2026-01-23 20:10:22,819 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:10:22.818641-03:00
+2026-01-23 20:10:23,269 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 20:10:23,903 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:10:23,903 INFO RESUMO: analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:10:23,903 INFO ===== ciclo finalizado =====
+2026-01-23 20:10:42,175 INFO ===== ciclo iniciado =====
+2026-01-23 20:10:42,176 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:10:42.175548-03:00
+2026-01-23 20:10:42,703 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 20:10:43,377 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:10:43,378 INFO RESUMO: analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:10:43,378 INFO ===== ciclo finalizado =====
+2026-01-23 20:11:01,642 INFO ===== ciclo iniciado =====
+2026-01-23 20:11:01,642 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:11:01.641680-03:00
+2026-01-23 20:11:02,055 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 20:11:02,703 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:11:02,703 INFO RESUMO: analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:11:02,703 INFO ===== ciclo finalizado =====
+2026-01-23 20:11:20,972 INFO ===== ciclo iniciado =====
+2026-01-23 20:11:20,972 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:11:20.971913-03:00
+2026-01-23 20:11:21,490 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 20:11:21,889 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:11:21,889 INFO RESUMO: analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:11:21,889 INFO ===== ciclo finalizado =====
+2026-01-23 20:11:40,190 INFO ===== ciclo iniciado =====
+2026-01-23 20:11:40,190 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:11:40.189963-03:00
+2026-01-23 20:11:40,618 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 20:11:41,012 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:11:41,012 INFO RESUMO: analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:11:41,012 INFO ===== ciclo finalizado =====
+2026-01-23 20:11:59,530 INFO ===== ciclo iniciado =====
+2026-01-23 20:11:59,531 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:11:59.530591-03:00
+2026-01-23 20:11:59,942 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 20:12:00,357 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:12:00,357 INFO RESUMO: analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:12:00,357 INFO ===== ciclo finalizado =====
+2026-01-23 20:12:19,000 INFO ===== ciclo iniciado =====
+2026-01-23 20:12:19,003 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:12:18.999993-03:00
+2026-01-23 20:12:19,454 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 20:12:19,992 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:12:19,993 INFO RESUMO: analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:12:19,993 INFO ===== ciclo finalizado =====
+2026-01-23 20:12:38,279 INFO ===== ciclo iniciado =====
+2026-01-23 20:12:38,279 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:12:38.278712-03:00
+2026-01-23 20:12:39,118 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 20:12:39,806 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:12:39,806 INFO RESUMO: analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 20:12:39,806 INFO ===== ciclo finalizado =====
+2026-01-23 17:15:07 -03 INFO ===== ciclo iniciado =====
+2026-01-23 17:15:07 -03 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:15:07.403312-03:00
+2026-01-23 17:15:08 -03 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 17:15:08 -03 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 17:15:08 -03 INFO RESUMO: analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 17:15:08 -03 INFO ===== ciclo finalizado =====
+2026-01-23 17:17:12 -03 INFO ===== ciclo iniciado =====
+2026-01-23 17:17:12 -03 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:17:12.313814-03:00
+2026-01-23 17:17:12 -03 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 17:17:13 -03 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 17:17:13 -03 INFO RESUMO: analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 17:17:13 -03 INFO ===== ciclo finalizado =====
+2026-01-23 17:17:31 -03 INFO ===== ciclo iniciado =====
+2026-01-23 17:17:31 -03 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:17:31.664247-03:00
+2026-01-23 17:17:32 -03 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 17:17:32 -03 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 17:17:32 -03 INFO RESUMO: analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 17:17:32 -03 INFO ===== ciclo finalizado =====
+2026-01-23 17:17:51 -03 INFO ===== ciclo iniciado =====
+2026-01-23 17:17:51 -03 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:17:51.024224-03:00
+2026-01-23 17:17:51 -03 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 17:17:52 -03 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 17:17:52 -03 INFO RESUMO: analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 17:17:52 -03 INFO ===== ciclo finalizado =====
+2026-01-23 17:19:27 -03 INFO ===== ciclo iniciado =====
+2026-01-23 17:19:27 -03 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:19:27.416578-03:00
+2026-01-23 17:19:27 -03 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 17:19:28 -03 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 17:19:28 -03 INFO RESUMO: analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 17:19:28 -03 INFO ===== ciclo finalizado =====
+2026-01-23 17:19:46 -03 INFO ===== ciclo iniciado =====
+2026-01-23 17:19:46 -03 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:19:46.617722-03:00
+2026-01-23 17:19:47 -03 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 17:19:47 -03 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 17:19:47 -03 INFO RESUMO: analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 17:19:47 -03 INFO ===== ciclo finalizado =====
+2026-01-23 17:20:13 -03 INFO ===== ciclo iniciado =====
+2026-01-23 17:20:13 -03 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:20:13.920094-03:00
+2026-01-23 17:20:14 -03 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 17:20:14 -03 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 17:20:14 -03 INFO RESUMO: analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 17:20:14 -03 INFO ===== ciclo finalizado =====
+2026-01-23 17:20:27 -03 INFO ===== ciclo iniciado =====
+2026-01-23 17:20:27 -03 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:20:27.278372-03:00
+2026-01-23 17:20:27 -03 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 17:20:29 -03 INFO [Passageiro de Primeira (RSS)] NOTIFICADO: Compre dólar com cashback! Abra conta na Nomad e garanta o benefício em todas as conversões de dólares durante 1 mês -> https://passageirodeprimeira.com/compre-dolar-com-cashback-abra-conta-na-nomad-e-garanta-o-beneficio-em-todas-as-conversoes-de-dolares-durante-1-mes/
+2026-01-23 17:20:30 -03 INFO [Passageiro de Primeira (RSS)] NOTIFICADO: Mochilas para viagem com até 22% de desconto na Amazon -> https://passageirodeprimeira.com/mochilas-para-viagem-com-ate-22-de-desconto-na-amazon-2/
+2026-01-23 17:20:31 -03 INFO [Passageiro de Primeira (RSS)] NOTIFICADO: Esfera oferece até 6 pontos por real gasto na Monte Carlo, Riachuelo e outros parceiros -> https://passageirodeprimeira.com/esfera-oferece-ate-6-pontos-por-real-gasto-na-monte-carlo-riachuelo-e-outros-parceiros/
+2026-01-23 17:20:32 -03 INFO [Passageiro de Primeira (RSS)] NOTIFICADO: Último dia para ganhar 30% de bônus ao transferir pontos dos cartões de crédito para o LATAM Pass -> https://passageirodeprimeira.com/ultimo-dia-para-ganhar-30-de-bonus-ao-transferir-pontos-dos-cartoes-de-credito-para-o-latam-pass/
+2026-01-23 17:20:33 -03 INFO [Passageiro de Primeira (RSS)] NOTIFICADO: Azul oferece descontos de até 25% no resgate de passagens aéreas -> https://passageirodeprimeira.com/azul-oferece-descontos-de-ate-25-no-resgate-de-passagens-aereas/
+2026-01-23 17:20:34 -03 INFO [Passageiro de Primeira (RSS)] NOTIFICADO: Oferta relâmpago! Assine o Clube Azul 5.000 por R$ 55 no plano anual – milheiro a partir de R$ 9,90 -> https://passageirodeprimeira.com/oferta-clube-azul-5000-anual/
+2026-01-23 17:20:34 -03 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=6
+2026-01-23 17:20:34 -03 INFO RESUMO: analisados=30 nao_hoje=11 sem_data=0 notificados=6
+2026-01-23 17:20:34 -03 INFO ===== ciclo finalizado =====
+2026-01-23 17:22:29 -03 INFO ===== ciclo iniciado =====
+2026-01-23 17:22:29 -03 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:22:29.282162-03:00
+2026-01-23 17:22:29 -03 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 17:22:30 -03 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 17:22:30 -03 INFO RESUMO: analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 17:22:30 -03 INFO ===== ciclo finalizado =====
+2026-01-23 17:22:48 -03 INFO ===== ciclo iniciado =====
+2026-01-23 17:22:48 -03 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:22:48.816423-03:00
+2026-01-23 17:22:49 -03 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 17:22:50 -03 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 17:22:50 -03 INFO RESUMO: analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 17:22:50 -03 INFO ===== ciclo finalizado =====
+2026-01-23 17:30:59 -03 INFO ===== ciclo iniciado =====
+2026-01-23 17:30:59 -03 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:30:59.391881-03:00
+2026-01-23 17:31:00 -03 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 17:31:00 -03 INFO [Passageiro de Primeira] analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 17:31:00 -03 INFO RESUMO: analisados=30 nao_hoje=11 sem_data=0 notificados=0
+2026-01-23 17:31:00 -03 INFO ===== ciclo finalizado =====
+2026-01-23 17:41:38 -03 INFO ===== ciclo iniciado =====
+2026-01-23 17:41:38 -03 INFO Timezone: America/Sao_Paulo | verificado em: 2026-01-23T17:41:38.468302-03:00
+2026-01-23 17:41:39 -03 INFO [Melhores Destinos] analisados=0 nao_hoje=0 sem_data=0 notificados=0
+2026-01-23 17:41:39 -03 INFO [Passageiro de Primeira] analisados=30 nao_hoje=10 sem_data=0 notificados=0
+2026-01-23 17:41:39 -03 INFO RESUMO: analisados=30 nao_hoje=10 sem_data=0 notificados=0
+2026-01-23 17:41:39 -03 INFO ===== ciclo finalizado =====

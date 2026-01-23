@@ -13,3 +13,4 @@ Teste:
 
 python news_monitor\monitor_universal.py
 
+bash /workspaces/bbruno123.github.io/news_alert_script/run_monitor.sh
