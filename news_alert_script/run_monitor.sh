@@ -26,7 +26,7 @@ export MONITOR_DB="${MONITOR_DB:-$PWD/monitor.sqlite3}"
 export MONITOR_LOG="${MONITOR_LOG:-$PWD/monitor.log}"
 
 # Intervalo de espera entre execuções (pode ser sobrescrito via env)
-SLEEP_SECONDS="${SLEEP_SECONDS:-3600}"
+SLEEP_SECONDS="${SLEEP_SECONDS:-20}"
 
 while true; do
     echo -e "\n   ===== INICIANDO $(date) ====="
