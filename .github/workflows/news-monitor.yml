@@ -2,7 +2,7 @@ name: News Monitor
 
 on:
   schedule:
-    - cron: "*/1 * * * *"  # roda todo início de hora
+    - cron: "*/5 * * * *"  # roda todo início de hora
   workflow_dispatch: {}
 
 concurrency:
