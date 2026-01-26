@@ -60,7 +60,15 @@ jobs:
           git add news_alert_script/monitor.sqlite3 || true
           if ! git diff --cached --quiet; then
             git commit -m "chore: update monitor state [skip ci]"
-            git push
+            # Pull com rebase para incorporar novos commits do repositório
+            if ! git pull --rebase --autostash origin main; then
+              echo "⚠️ Pull rebase falhou (possível conflito). DB será atualizado na próxima execução."
+              git rebase --abort 2>/dev/null || true
+            elif ! git push; then
+              echo "⚠️ Push falhou. DB será atualizado na próxima execução."
+            else
+              echo "✅ Estado do monitor sincronizado com sucesso!"
+            fi
           else
             echo "No changes to commit."
           fi
