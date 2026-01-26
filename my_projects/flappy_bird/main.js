@@ -73,7 +73,7 @@ function timer(){
             if (i === timerBoost - 1) {
                 canJump = true;
             }
-        }, 15 * i * deltaTimeSec);
+        }, 15 * i);
     }
 }
 
