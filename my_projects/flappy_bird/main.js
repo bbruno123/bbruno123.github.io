@@ -1,4 +1,6 @@
 const bird = document.getElementById("bird");
+const background_bottom = document.getElementById("background_bottom");
+const background_top = document.getElementById("background_top");
 
 let birdSpeed = 2;
 let freeMove = false;
@@ -6,7 +8,7 @@ let freeMove = false;
 let birdBoost = 0;
 let canJump = true;
 
-let isGravity = true;
+let isGravity = false;
 
 // Delta Time variables
 let lastTimestamp = 0;
@@ -39,11 +41,14 @@ function update(timestamp) {
     if (!isGameOver){
         
         if(isGravity){
-            gravity();
+            if(!freeMove){
+                gravity();
+            }
         }
     
         groundRoofCollision();
     }
+    groundMovement();
 }
 
 window.addEventListener("keydown", (event) => {
@@ -75,6 +80,13 @@ window.addEventListener("keydown", (event) => {
                 jump();
             }
         }
+
+        // if(event.key.toLocaleLowerCase() === "a"){
+        //     background_bottom.style.left = (parseFloat(getComputedStyle(background_bottom).left) -birdSpeed) + "px";
+        // }
+        // if(event.key.toLocaleLowerCase() === "d"){
+        //     background_bottom.style.left = (parseFloat(getComputedStyle(background_bottom).left) +birdSpeed) + "px";
+        // }
     }
     
 });
@@ -109,19 +121,37 @@ function gravity(){
 
 const pageHeight = window.innerHeight;
 
+let background_topBottom = background_top.getBoundingClientRect().bottom;
+
+console.log(background_top.getBoundingClientRect().bottom);
+
 let isGameOver = false;
 
 function groundRoofCollision(){
     const birdPosition = parseFloat(getComputedStyle(bird).top) || 0;
 
-    if (birdPosition > pageHeight){
+    if (birdPosition > background_topBottom - 24){
         isGameOver = true;
 
-    }else if (birdPosition < 0){
+    }else if (birdPosition < -10){
         isGameOver = true;
     }
 
     console.log(birdPosition);
+}
+
+let groundSpeed = 150;
+
+function groundMovement(){
+    const backgroundBottomPosition = (parseFloat(getComputedStyle(background_bottom).left) || 0);
+    
+    // console.log(backgroundBottomPosition);
+    
+    if (backgroundBottomPosition < -16){
+        background_bottom.style.left = parseFloat("0") + "px";
+    }else{
+        background_bottom.style.left = ((parseFloat(getComputedStyle(background_bottom).left) || 0) -groundSpeed * deltaTimeSec) + "px";
+    }
 }
 
 update();
@@ -146,5 +176,5 @@ update();
 
 let string = "5";
 
-console.log(parseFloat(pageHeight));
+// console.log(parseFloat("0") + "px");
 
