@@ -191,7 +191,7 @@ function birdPipeCollision(){
 
     // if (birdPositionTop < bottomPipeTop && birdPositionRight > leftPipeTop){
     //     console.log("oi");
-    }
+    // }
 
 }
 
