@@ -1,12 +1,34 @@
 const bird = document.getElementById("bird");
+
 const background_bottom = document.getElementById("background_bottom");
 const background_top = document.getElementById("background_top");
 
-let birdSpeed = 2;
-let freeMove = false;
+const pipes = document.getElementById("pipes");
+const pipe_top = document.getElementById("pipe_top");
+const pipe_bottom = document.getElementById("pipe_bottom");
+
+// let i = parseFloat(getComputedStyle(pipe_top).top) || 0;
+
+pipes.style.gap = (Math.floor(Math.random() * (185 - 145 + 1)) + 145).toString() + "%"; //Mexe no gap dos 'pipes' entre 145% e 185%
+pipes.style.top = (Math.floor(Math.random() * (41)) - 50).toString() + "%"; //Mexe no top dos 'pipes' entre -10% e -50%
+
+//Pega o 'left' e 'bottom' do 'pipe_top'
+let leftPipeTop = pipe_top.getBoundingClientRect().left;
+let bottomPipeTop = pipe_top.getBoundingClientRect().bottom;
+
+//Pega o 'left' e 'top' do 'pipe_bottom'
+let leftPipeBottom = pipe_bottom.getBoundingClientRect().left;
+let topPipeBottom = pipe_bottom.getBoundingClientRect().top;
+
+//Printa as posições dos 'pipes' 
+console.log(`pipe_top: left: ${leftPipeTop}, bottom: ${bottomPipeTop}`);
+console.log(`pipe_bottom: left: ${leftPipeBottom}, top: ${topPipeBottom}`);
+
+let birdSpeed = 5;
+let freeMove = true;
 
 let birdBoost = 0;
-let canJump = true;
+// let canJump = true;
 
 let isGravity = false;
 
@@ -54,7 +76,7 @@ function update(timestamp) {
 window.addEventListener("keydown", (event) => {
 
     if(event.key.toLocaleLowerCase() === "b" && event.shiftKey && !event.repeat){
-        freeMove = true;
+        freeMove = !freeMove;
     }
 
     if(freeMove){
@@ -93,7 +115,7 @@ window.addEventListener("keydown", (event) => {
 
 function jump(){
 
-    let jumpBoost = 15;
+    let jumpBoost = 10;
     isGravity = false;
 
     for (let i = 0; i <= jumpBoost; i++){
@@ -123,7 +145,7 @@ const pageHeight = window.innerHeight;
 
 let background_topBottom = background_top.getBoundingClientRect().bottom;
 
-console.log(background_top.getBoundingClientRect().bottom);
+// console.log(background_top.getBoundingClientRect().bottom);
 
 let isGameOver = false;
 
@@ -137,7 +159,7 @@ function groundRoofCollision(){
         isGameOver = true;
     }
 
-    console.log(birdPosition);
+    // console.log(birdPosition);
 }
 
 let groundSpeed = 150;
