@@ -187,6 +187,20 @@ input.addEventListener("keydown", (event) => {
 });
 
 lista.addEventListener("click", (event) => {
+    if (event.target.classList.contains("remover")) {
+        const li = event.target.closest("li");
+        const index = [...lista.children].indexOf(li);
+
+        if (index === -1) {
+            return;
+        }
+
+        vendedores.splice(index, 1);
+        salvarVendedores();
+        li.remove();
+        return;
+    }
+
     if (event.target.tagName === "P") {
         const p = event.target;
         const li = p.closest("li");
