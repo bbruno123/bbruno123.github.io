@@ -1,0 +1,90 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    overflow-y: auto;
+}
+
+#UI {
+    display: flex;
+
+    position: relative;
+
+    width: 100%;
+    min-height: 100dvh;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    gap: 30px;
+
+    box-sizing: border-box;
+
+    padding-top: 80px;
+    padding-bottom: 50px;
+}
+
+#UI ul {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    list-style: none;
+
+    gap: 30px;
+
+    padding: 30px 120px;
+    margin: 0;
+
+    box-sizing: border-box;
+}
+
+#UI li {
+    display: flex;
+    align-items: center;
+
+    flex-shrink: 0;
+}
+
+.botao_cor_verde {
+    background-color: green;
+}
+
+.botao_cor_vermelho {
+    background-color: red;
+}
+
+#UI p {
+    color: green;
+    font-size: 45px;
+
+    user-select: none;
+
+    padding-right: 20px;
+    margin: 0;
+}
+
+#editar {
+    position: fixed;
+
+    top: 20px;
+    right: 20px;
+
+    z-index: 10;
+}
+
+.remover {
+    margin: 0 6px;
+}
+
+.hidden {
+    display: none;
+}
