@@ -45,8 +45,8 @@ let vendedores = normalizarVendedores(
 const input = document.getElementById("nome_vendedor");
 const lista = document.getElementById("lista_vendedores");
 const botaoAdicionar = document.getElementById("adicionar_vendedor");
+const adicionar = document.querySelector(".adicionar");
 const editar = document.getElementById("editar");
-const adicionar_vendedor = document.getElementById("adicionar_vendedor");
 
 // ========================================
 // FUNÇÕES AUXILIARES
@@ -146,7 +146,7 @@ editar.addEventListener("click", () => {
     botoesCima.forEach((botao) => botao.classList.toggle("hidden"));
     botoesBaixo.forEach((botao) => botao.classList.toggle("hidden"));
 
-    adicionar_vendedor.classList.toggle("hidden");
+    adicionar.classList.toggle("hidden");
     hidden = !hidden;
 });
 
