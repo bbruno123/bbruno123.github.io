@@ -47,6 +47,10 @@ const lista = document.getElementById("lista_vendedores");
 const botaoAdicionar = document.getElementById("adicionar_vendedor");
 const adicionar = document.querySelector(".adicionar");
 const editar = document.getElementById("editar");
+const overlay = document.getElementById("overlay");
+const senha = document.getElementById("senha");
+const formSenha = overlay.querySelector("form");
+
 
 // ========================================
 // FUNÇÕES AUXILIARES
@@ -135,7 +139,7 @@ lista.innerHTML = "";
 
 let hidden = true;
 
-editar.addEventListener("click", () => {
+function alternarModoEdicao() {
     const botoesRemover = document.querySelectorAll(".remover");
     const botoesMudar = document.querySelectorAll(".mudar");
     const botoesCima = document.querySelectorAll(".botao_cima");
@@ -148,6 +152,17 @@ editar.addEventListener("click", () => {
 
     adicionar.classList.toggle("hidden");
     hidden = !hidden;
+}
+
+editar.addEventListener("click", () => {
+    if (hidden) {
+        overlay.classList.remove("hidden");
+        senha.value = "";
+        senha.focus();
+        return;
+    }
+
+    alternarModoEdicao();
 });
 
 vendedores.forEach((vendedor) => {
@@ -293,4 +308,20 @@ lista.addEventListener("click", (event) => {
 
         salvarVendedores();
     }
+});
+
+const password = "admin";
+
+formSenha.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if (senha.value === password) {
+        overlay.classList.add("hidden");
+        senha.value = "";
+        alternarModoEdicao();
+        return;
+    }
+
+    senha.value = "";
+    senha.focus();
 });

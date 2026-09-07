@@ -27,8 +27,8 @@ body {
 
     box-sizing: border-box;
 
-    padding-top: 80px;
-    padding-bottom: 50px;
+    /* padding-top: 80px;
+    padding-bottom: 50px; */
 }
 
 #UI ul {
@@ -78,13 +78,37 @@ body {
     top: 20px;
     right: 20px;
 
-    z-index: 10;
+    z-index: 1;
 }
 
 .remover {
     margin: 0 6px;
 }
 
+#overlay {
+    display: flex;
+
+    position: absolute;
+
+    height: 100%;
+    width: 100%;
+
+    /* opacity: 50%; */
+
+    background-color: black;
+
+    z-index: 2;
+}
+
+#senha {
+    position: absolute;
+
+    top: 15%;
+    left: 50%;
+
+    transform: translate(-50%, -15%);
+}
+
 .hidden {
-    display: none;
+    display: none !important;
 }
