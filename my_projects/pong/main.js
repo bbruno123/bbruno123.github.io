@@ -17,8 +17,6 @@ const body = document.querySelector("body");
 const maxHeight = window.innerHeight;
 const maxWidth = window.innerWidth;
 
-console.log(maxHeight, maxWidth);
-
 // Delta Time variables
 let lastTimestamp = 0;
 let deltaTimeMs = 0;

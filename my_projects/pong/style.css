@@ -84,7 +84,7 @@ body {
 
     color: red;
 
-    cursor: pointer;
+    cursor: auto;
     
     transform: translate(-50%, -20%);
 }
@@ -102,7 +102,7 @@ body {
     
     color: green;
     
-    cursor: pointer;
+    cursor: auto;
     
     transform: translate(-50%, -20%);
 }
