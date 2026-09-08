@@ -1,0 +1,126 @@
+html, body {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: black;
+}
+
+.bar {
+    display: flex;
+
+    height: 90px;
+    width: 12px;
+
+    background-color: white;
+}
+
+#bot {
+    position: absolute;
+
+    top: 50%;
+    right: 10px;
+}
+
+#player {
+    position: absolute;
+
+    top: 50%;
+    left: 10px;
+}
+
+#ball {
+    display: flex;
+    position: absolute;
+
+    height: 20px;
+    width: 20px;
+    
+    right: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+    background-color: white;
+}
+
+.score {
+    display: flex;
+
+    font-size: 35px;
+    font-weight: bolder;
+
+    color: white;
+}
+
+#scorePlayer {
+    position: absolute;
+
+    top: 30px;
+    left: 60px;
+}
+
+#scoreBot {
+    position: absolute;
+
+    top: 30px;
+    right: 60px;
+}
+
+#gameOver {
+    display: flex;
+
+    position: absolute;
+
+    font-size: 55px;
+    font-weight: bolder;
+
+    top: 20%;
+    left: 50%;
+
+    color: red;
+
+    cursor: pointer;
+    
+    transform: translate(-50%, -20%);
+}
+
+#youWin {
+    display: flex;
+    
+    position: absolute;
+    
+    font-size: 55px;
+    font-weight: bolder;
+    
+    top: 20%;
+    left: 50%;
+    
+    color: green;
+    
+    cursor: pointer;
+    
+    transform: translate(-50%, -20%);
+}
+
+.restart {
+    display: flex;
+
+    position: absolute;
+
+    font-size: 55px;
+    font-weight: bolder;
+
+    top: 50%;
+    left: 50%;
+
+    color: yellow;
+
+    transform: translate(-50%, -50%);
+}
+
+.hidden {
+    display: none !important;
+}
