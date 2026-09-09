@@ -140,9 +140,21 @@ function BallCollision(){
 }
 
 // ===== Movimento da Bola =====
-let speedBall = 155;
+let speedBall = 275;
+
+let randomInclination = Math.random(0.5, 3);
 
 function BallMovement(deltaTime){
+
+    //Randomiza a inclinação da bola toda vez que o player ou o bot marcarem ponto
+    if (ballHitRightWall === true || ballHitRightWall === true){
+        randomInclination = Math.random(0.5, 3);
+    }
+
+    //Normaliza a velocidade da bola
+    const normalizedSpeed = Math.hypot(1, randomInclination);
+    const verticalSpeed = speedBall / normalizedSpeed;
+    const horizontalSpeed = speedBall * randomInclination / normalizedSpeed;
 
     // Detecção de colisão com teto e chão
     if (ball.getBoundingClientRect().top <= 0){
@@ -155,26 +167,26 @@ function BallMovement(deltaTime){
     // Movimento da bola em direção ao jogador
     if (ballHitBot === false) {
         if (ballTopCollision === false) {
-            ball.style.top = ((parseFloat(getComputedStyle(ball).top) || 0) +deltaTime * -speedBall) + "px";
-            ball.style.left = ((parseFloat(getComputedStyle(ball).left) || 0) + deltaTime * speedBall * 1.5) + "px";
+            ball.style.top = ((parseFloat(getComputedStyle(ball).top) || 0) +deltaTime * -verticalSpeed) + "px";
+            ball.style.left = ((parseFloat(getComputedStyle(ball).left) || 0) + deltaTime * horizontalSpeed) + "px";
         }else {
-            ball.style.top = ((parseFloat(getComputedStyle(ball).top) || 0) +deltaTime * speedBall) + "px";
-            ball.style.left = ((parseFloat(getComputedStyle(ball).left) || 0) + deltaTime * speedBall * 1.5) + "px";
+            ball.style.top = ((parseFloat(getComputedStyle(ball).top) || 0) + deltaTime * verticalSpeed) + "px";
+            ball.style.left = ((parseFloat(getComputedStyle(ball).left) || 0) + deltaTime * horizontalSpeed) + "px";
         }
     }else {
         // Movimento da bola em direção ao bot
         if (ballTopCollision === false) {
-            ball.style.top = ((parseFloat(getComputedStyle(ball).top) || 0) +deltaTime * -speedBall) + "px";
-            ball.style.left = ((parseFloat(getComputedStyle(ball).left) || 0) + deltaTime * -speedBall * 1.5) + "px";
+            ball.style.top = ((parseFloat(getComputedStyle(ball).top) || 0) +deltaTime * -verticalSpeed) + "px";
+            ball.style.left = ((parseFloat(getComputedStyle(ball).left) || 0) + deltaTime * -horizontalSpeed) + "px";
         }else {
-            ball.style.top = ((parseFloat(getComputedStyle(ball).top) || 0) +deltaTime * speedBall) + "px";
-            ball.style.left = ((parseFloat(getComputedStyle(ball).left) || 0) + deltaTime * -speedBall * 1.5) + "px";
+            ball.style.top = ((parseFloat(getComputedStyle(ball).top) || 0) + deltaTime * verticalSpeed) + "px";
+            ball.style.left = ((parseFloat(getComputedStyle(ball).left) || 0) + deltaTime * -horizontalSpeed) + "px";
         }
     }
 }
 
 // ===== Movimento dos Paddles =====
-let speedBar = 135;
+let speedBar = 125;
 
 // Movimento automático do bot (IA)
 function BotMovement(deltaTime){
