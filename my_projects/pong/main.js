@@ -142,13 +142,13 @@ function BallCollision(){
 // ===== Movimento da Bola =====
 let speedBall = 275;
 
-let randomInclination = Math.random(0.5, 3);
+let randomInclination = Math.random(1.0, 3.0);
 
 function BallMovement(deltaTime){
 
     //Randomiza a inclinação da bola toda vez que o player ou o bot marcarem ponto
     if (ballHitRightWall === true || ballHitRightWall === true){
-        randomInclination = Math.random(0.5, 3);
+        randomInclination = Math.random(1.0, 3.0);
     }
 
     //Normaliza a velocidade da bola
