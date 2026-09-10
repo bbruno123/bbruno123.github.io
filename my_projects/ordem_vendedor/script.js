@@ -13,6 +13,9 @@ function normalizarVendedores(dados) {
                 return {
                     nome: item,
                     cor: "verde",
+                    vendeu: 0,
+                    naoVendeu: 0,
+                    almoco: 0,
                 };
             }
 
@@ -28,6 +31,15 @@ function normalizarVendedores(dados) {
                     cor: item.cor === "vermelho" ? "vermelho" : "verde",
                     vezesVermelho: Number.isInteger(item.vezesVermelho) && item.vezesVermelho >= 0
                         ? item.vezesVermelho
+                        : 0,
+                    vendeu: Number.isInteger(item.vendeu) && item.vendeu >= 0
+                        ? item.vendeu
+                        : 0,
+                    naoVendeu: Number.isInteger(item.naoVendeu) && item.naoVendeu >= 0
+                        ? item.naoVendeu
+                        : 0,
+                    almoco: Number.isInteger(item.almoco) && item.almoco >= 0
+                        ? item.almoco
                         : 0,
                 };
             }
@@ -66,6 +78,7 @@ function obterNomeDoMes(anoMes) {
 }
 
 let pastaRelatorios = null;
+const chaveCaminhoPastaRelatorios = "caminhoPastaRelatorios";
 
 function abrirBancoDeRelatorios() {
     return new Promise((resolve, reject) => {
@@ -109,6 +122,10 @@ async function carregarPastaRelatorios() {
         leitura.onerror = () => reject(leitura.error);
     });
     banco.close();
+
+    if (pastaRelatorios) {
+        localStorage.setItem(chaveCaminhoPastaRelatorios, pastaRelatorios.name);
+    }
 }
 
 async function selecionarPastaRelatorios() {
@@ -119,6 +136,10 @@ async function selecionarPastaRelatorios() {
 
     try {
         pastaRelatorios = await window.showDirectoryPicker({ mode: "readwrite" });
+        localStorage.setItem(
+            chaveCaminhoPastaRelatorios,
+            pastaRelatorios.name
+        );
         await salvarPastaRelatorios();
         alert("Pasta dos relatorios salva.");
     } catch (erro) {
@@ -130,9 +151,10 @@ async function selecionarPastaRelatorios() {
 }
 
 function gerarRelatorioDoMes(mesPrevio, dados) {
-    const nomeDoMes = obterNomeDoMes(mesPrevio);
     const linhas = dados
-        .map((vendedor) => `${vendedor.nome} ${nomeDoMes}: ${vendedor.vezesVermelho}`)
+        .map((vendedor) =>
+            `${vendedor.nome} | Vendeu: ${vendedor.vendeu} | Não Vendeu: ${vendedor.naoVendeu} | Almoço: ${vendedor.almoco}`
+        )
         .join("\n");
     
     return linhas + "\n";
@@ -188,14 +210,14 @@ const lista = document.getElementById("lista_vendedores");
 const botaoAdicionar = document.getElementById("adicionar_vendedor");
 const adicionar = document.querySelector(".adicionar");
 const editar = document.getElementById("editar");
-const overlay = document.getElementById("overlay");
-const senha = document.getElementById("senha");
-const formSenha = overlay.querySelector("form");
+const resultadoOverlay = document.getElementById("resultado_overlay");
+const botoesResultado = resultadoOverlay.querySelectorAll("button[data-resultado]");
 const botaoGerarRelatorio = document.getElementById("gerar_relatorio_manual");
 const botaoSelecionarPasta = document.getElementById("selecionar_pasta_relatorios");
 const chaveRelatorioPendente = "relatorioPendente";
 
 let relatorioPendente = null;
+let vendedorSelecionadoIndex = null;
 
 function criarRelatorioPendente(mes) {
     const dados = vendedores.map((vendedor) => ({ ...vendedor }));
@@ -253,6 +275,7 @@ botaoGerarRelatorio.addEventListener("click", async () => {
             chaveRelatorioPendente,
             JSON.stringify(relatorioPendente)
         );
+        resetarResultadosVendedores();
 
         alert(
             "O relatorio foi preparado. Clique em OK para atualizar a pagina. Depois da atualizacao, clique novamente para baixar."
@@ -281,6 +304,10 @@ botaoGerarRelatorio.addEventListener("click", async () => {
         relatorioParaBaixar.conteudo
     );
 
+    vendedores.forEach((vendedor, index) => {
+        atualizarTextoVendedor(lista.children[index], vendedor);
+    });
+
     botaoGerarRelatorio.textContent = "Gerar Relatório";
 });
 
@@ -291,6 +318,17 @@ botaoGerarRelatorio.addEventListener("click", async () => {
 
 function salvarVendedores() {
     localStorage.setItem("vendedores", JSON.stringify(vendedores));
+}
+
+function resetarResultadosVendedores() {
+    vendedores.forEach((vendedor, index) => {
+        vendedor.vendeu = 0;
+        vendedor.naoVendeu = 0;
+        vendedor.almoco = 0;
+        vendedor.vezesVermelho = 0;
+        atualizarTextoVendedor(lista.children[index], vendedor);
+    });
+    salvarVendedores();
 }
 
 function atualizarTextoVendedor(li, vendedor) {
@@ -348,6 +386,10 @@ function criarElementoVendedor(vendedor) {
     botaoBaixo.classList.add("botao_baixo");
     botaoBaixo.textContent = "⬇️";
 
+    const botaoAlmoco = document.createElement("button");
+    botaoAlmoco.classList.add("botao_almoco");
+    botaoAlmoco.textContent = "Almoço";
+
     if (hidden) {
         botaoRemover.classList.add("hidden");
         botaoCor.classList.add("hidden");
@@ -360,6 +402,7 @@ function criarElementoVendedor(vendedor) {
     li.appendChild(botaoRemover);
     li.appendChild(botaoCima);
     li.appendChild(botaoBaixo);
+    li.appendChild(botaoAlmoco);
 
     atualizarTextoVendedor(li, vendedor);
     aplicarCorVisual(li, vendedor.cor);
@@ -373,6 +416,65 @@ function atualizarEstadoDoItem(index, novaCor) {
     }
 
     vendedores[index].cor = novaCor;
+    salvarVendedores();
+}
+
+function registrarResultadoVendedor(resultado) {
+    if (vendedorSelecionadoIndex === null) {
+        return;
+    }
+
+    const index = vendedorSelecionadoIndex;
+    const vendedor = vendedores[index];
+
+    vendedor[resultado] += 1;
+    vendedor.cor = "verde";
+    vendedores.splice(index, 1);
+
+    const ultimoVerde = vendedores.reduce(
+        (ultimoIndex, item, itemIndex) =>
+            item.cor === "verde" ? itemIndex : ultimoIndex,
+        -1
+    );
+    const novaPosicao = ultimoVerde + 1;
+
+    vendedores.splice(novaPosicao, 0, vendedor);
+
+    const li = lista.children[index];
+    atualizarTextoVendedor(li, vendedor);
+    aplicarCorVisual(li, vendedor.cor);
+
+    const referencia = lista.children[novaPosicao];
+    if (referencia && referencia !== li) {
+        lista.insertBefore(li, referencia);
+    } else {
+        lista.appendChild(li);
+    }
+
+    vendedorSelecionadoIndex = null;
+    resultadoOverlay.classList.add("hidden");
+    salvarVendedores();
+}
+
+function registrarAlmoco(index, li) {
+    const vendedor = vendedores[index];
+
+    if (!vendedor) {
+        return;
+    }
+
+    vendedor.almoco += 1;
+
+    if (vendedor.cor === "verde") {
+        vendedor.cor = "vermelho";
+    }
+
+    vendedores.splice(index, 1);
+    vendedores.push(vendedor);
+
+    atualizarTextoVendedor(li, vendedor);
+    aplicarCorVisual(li, vendedor.cor);
+    lista.appendChild(li);
     salvarVendedores();
 }
 
@@ -400,13 +502,6 @@ function alternarModoEdicao() {
 }
 
 editar.addEventListener("click", () => {
-    if (hidden) {
-        overlay.classList.remove("hidden");
-        senha.value = "";
-        senha.focus();
-        return;
-    }
-
     alternarModoEdicao();
 });
 
@@ -429,6 +524,9 @@ botaoAdicionar.addEventListener("click", () => {
         nome,
         cor: "verde",
         vezesVermelho: 0,
+        vendeu: 0,
+        naoVendeu: 0,
+        almoco: 0,
     };
 
     vendedores.unshift(novoVendedor);
@@ -448,6 +546,18 @@ input.addEventListener("keydown", (event) => {
 });
 
 lista.addEventListener("click", (event) => {
+    if (event.target.classList.contains("botao_almoco")) {
+        const li = event.target.closest("li");
+        const index = [...lista.children].indexOf(li);
+
+        if (index === -1) {
+            return;
+        }
+
+        registrarAlmoco(index, li);
+        return;
+    }
+
     if (event.target.classList.contains("remover")) {
         const li = event.target.closest("li");
         const index = [...lista.children].indexOf(li);
@@ -475,32 +585,8 @@ lista.addEventListener("click", (event) => {
         const novaCor = vendedor.cor === "verde" ? "vermelho" : "verde";
 
         if (vendedor.cor === "vermelho") {
-            vendedores.splice(index, 1);
-
-            const vendedorAtualizado = {
-                ...vendedor,
-                cor: novaCor,
-            };
-
-            const ultimoVerde = vendedores.reduce(
-                (ultimoIndex, item, itemIndex) =>
-                    item.cor === "verde" ? itemIndex : ultimoIndex,
-                -1
-            );
-            const novaPosicao = ultimoVerde + 1;
-
-            vendedores.splice(novaPosicao, 0, vendedorAtualizado);
-            atualizarTextoVendedor(li, vendedorAtualizado);
-            aplicarCorVisual(li, novaCor);
-
-            const referencia = lista.children[novaPosicao];
-            if (referencia) {
-                lista.insertBefore(li, referencia);
-            } else {
-                lista.appendChild(li);
-            }
-
-            salvarVendedores();
+            vendedorSelecionadoIndex = index;
+            resultadoOverlay.classList.remove("hidden");
             return;
         }
 
@@ -593,18 +679,19 @@ lista.addEventListener("click", (event) => {
     }
 });
 
-const password = "admin";
-
-formSenha.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    if (senha.value === password) {
-        overlay.classList.add("hidden");
-        senha.value = "";
-        alternarModoEdicao();
-        return;
-    }
-
-    senha.value = "";
-    senha.focus();
+botoesResultado.forEach((botao) => {
+    botao.addEventListener("click", () => {
+        registrarResultadoVendedor(botao.dataset.resultado);
+    });
 });
+
+// setInterval(() => {
+//     console.table(
+//         vendedores.map(({ nome, vendeu, naoVendeu, almoco }) => ({
+//             nome,
+//             vendeu,
+//             naoVendeu,
+//             almoco,
+//         }))
+//     );
+// }, 5000);

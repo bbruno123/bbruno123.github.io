@@ -21,12 +21,12 @@
         <button id="selecionar_pasta_relatorios" type="button">
             Selecionar pasta dos relatórios
         </button>
-        <span id="overlay" class="hidden" >
-            <form>
-                <label for="senha"></label>
-                <input type="password" id="senha" placeholder="Digite a senha">
-            </form>
-        </span>
+        <div id="resultado_overlay" class="hidden">
+            <div class="resultado_opcoes">
+                <button type="button" data-resultado="vendeu">Vendeu</button>
+                <button type="button" data-resultado="naoVendeu">Não Vendeu</button>
+            </div>
+        </div>
     </div>
     <script src="script.js?v=20260910-3"></script>
 </body>

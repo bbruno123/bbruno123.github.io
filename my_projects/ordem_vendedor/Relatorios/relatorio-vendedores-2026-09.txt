@@ -1,0 +1,3 @@
+b | Vendeu: 0 | Não Vendeu: 0 | Almoço: 1
+c | Vendeu: 0 | Não Vendeu: 0 | Almoço: 23
+a | Vendeu: 1 | Não Vendeu: 4 | Almoço: 10
