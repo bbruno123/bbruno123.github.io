@@ -26,6 +26,9 @@ function normalizarVendedores(dados) {
                 return {
                     nome,
                     cor: item.cor === "vermelho" ? "vermelho" : "verde",
+                    vezesVermelho: Number.isInteger(item.vezesVermelho) && item.vezesVermelho >= 0
+                        ? item.vezesVermelho
+                        : 0,
                 };
             }
 
@@ -39,6 +42,144 @@ let vendedores = normalizarVendedores(
 );
 
 // ========================================
+// FUNÇÕES DE RELATÓRIO
+// ========================================
+
+function obterMesAtual() {
+    const agora = new Date();
+    return `${agora.getFullYear()}-${String(agora.getMonth() + 1).padStart(2, "0")}`;
+}
+
+function obterNomeArquivoRelatorioAtual(agora = new Date()) {
+    const ano = agora.getFullYear();
+    const mes = String(agora.getMonth() + 1).padStart(2, "0");
+
+    return `relatorio-vendedores-${ano}-${mes}.txt`;
+}
+
+function obterNomeDoMes(anoMes) {
+    const [ano, mes] = anoMes.split("-").map(Number);
+    const nomeDoMes = new Intl.DateTimeFormat("pt-BR", { month: "long" }).format(
+        new Date(ano, mes - 1, 1)
+    );
+    return nomeDoMes.charAt(0).toUpperCase() + nomeDoMes.slice(1);
+}
+
+let pastaRelatorios = null;
+
+function abrirBancoDeRelatorios() {
+    return new Promise((resolve, reject) => {
+        const requisicao = indexedDB.open("ordemVendedorRelatorios", 1);
+
+        requisicao.onupgradeneeded = () => {
+            requisicao.result.createObjectStore("configuracao");
+        };
+        requisicao.onsuccess = () => resolve(requisicao.result);
+        requisicao.onerror = () => reject(requisicao.error);
+    });
+}
+
+async function salvarPastaRelatorios() {
+    if (!pastaRelatorios || !window.indexedDB) {
+        return;
+    }
+
+    const banco = await abrirBancoDeRelatorios();
+    const transacao = banco.transaction("configuracao", "readwrite");
+
+    transacao.objectStore("configuracao").put(pastaRelatorios, "pasta");
+    await new Promise((resolve, reject) => {
+        transacao.oncomplete = resolve;
+        transacao.onerror = () => reject(transacao.error);
+    });
+    banco.close();
+}
+
+async function carregarPastaRelatorios() {
+    if (!window.indexedDB) {
+        return;
+    }
+
+    const banco = await abrirBancoDeRelatorios();
+    const transacao = banco.transaction("configuracao", "readonly");
+    const leitura = transacao.objectStore("configuracao").get("pasta");
+
+    pastaRelatorios = await new Promise((resolve, reject) => {
+        leitura.onsuccess = () => resolve(leitura.result || null);
+        leitura.onerror = () => reject(leitura.error);
+    });
+    banco.close();
+}
+
+async function selecionarPastaRelatorios() {
+    if (!window.showDirectoryPicker) {
+        alert("Este navegador nao permite selecionar uma pasta. O relatorio sera baixado pelo navegador.");
+        return;
+    }
+
+    try {
+        pastaRelatorios = await window.showDirectoryPicker({ mode: "readwrite" });
+        await salvarPastaRelatorios();
+        alert("Pasta dos relatorios salva.");
+    } catch (erro) {
+        if (erro.name !== "AbortError") {
+            console.error("Nao foi possivel salvar a pasta dos relatorios.", erro);
+            alert("Nao foi possivel salvar a pasta escolhida.");
+        }
+    }
+}
+
+function gerarRelatorioDoMes(mesPrevio, dados) {
+    const nomeDoMes = obterNomeDoMes(mesPrevio);
+    const linhas = dados
+        .map((vendedor) => `${vendedor.nome} ${nomeDoMes}: ${vendedor.vezesVermelho}`)
+        .join("\n");
+    
+    return linhas + "\n";
+}
+
+async function baixarArquivoTxt(nomeArquivo, conteudo) {
+    console.log("Nome recebido por baixarArquivoTxt:", nomeArquivo);
+
+    if (pastaRelatorios) {
+        try {
+            const permissao = await pastaRelatorios.queryPermission({ mode: "readwrite" });
+            const permissaoAtualizada = permissao === "granted"
+                ? permissao
+                : await pastaRelatorios.requestPermission({ mode: "readwrite" });
+
+            if (permissaoAtualizada === "granted") {
+                console.log("Nome usado no getFileHandle:", nomeArquivo);
+                const arquivo = await pastaRelatorios.getFileHandle(nomeArquivo, {
+                    create: true,
+                });
+                const escritor = await arquivo.createWritable();
+
+                await escritor.write(conteudo);
+                await escritor.close();
+                alert(`Relatorio salvo em ${nomeArquivo}.`);
+                return;
+            }
+        } catch (erro) {
+            console.error("Nao foi possivel gravar na pasta selecionada.", erro);
+        }
+    }
+
+    const blob = new Blob([conteudo], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    
+    link.href = url;
+    link.download = nomeArquivo;
+    console.log("Nome usado no link.download:", nomeArquivo);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    setTimeout(() => URL.revokeObjectURL(url), 100);
+}
+
+// ========================================
 // ELEMENTOS DO HTML
 // ========================================
 
@@ -50,6 +191,98 @@ const editar = document.getElementById("editar");
 const overlay = document.getElementById("overlay");
 const senha = document.getElementById("senha");
 const formSenha = overlay.querySelector("form");
+const botaoGerarRelatorio = document.getElementById("gerar_relatorio_manual");
+const botaoSelecionarPasta = document.getElementById("selecionar_pasta_relatorios");
+const chaveRelatorioPendente = "relatorioPendente";
+
+let relatorioPendente = null;
+
+function criarRelatorioPendente(mes) {
+    const dados = vendedores.map((vendedor) => ({ ...vendedor }));
+
+    return {
+        mes,
+        conteudo: gerarRelatorioDoMes(mes, dados),
+    };
+}
+
+try {
+    relatorioPendente = JSON.parse(
+        localStorage.getItem(chaveRelatorioPendente) || "null"
+    );
+
+    if (relatorioPendente && !relatorioPendente.conteudo) {
+        if (relatorioPendente.mes && Array.isArray(relatorioPendente.dados)) {
+            relatorioPendente = {
+                mes: relatorioPendente.mes,
+                conteudo: gerarRelatorioDoMes(
+                    relatorioPendente.mes,
+                    relatorioPendente.dados
+                ),
+            };
+            localStorage.setItem(
+                chaveRelatorioPendente,
+                JSON.stringify(relatorioPendente)
+            );
+        } else {
+            relatorioPendente = null;
+            localStorage.removeItem(chaveRelatorioPendente);
+        }
+    }
+} catch (erro) {
+    relatorioPendente = null;
+    localStorage.removeItem(chaveRelatorioPendente);
+}
+
+const carregamentoDaPasta = carregarPastaRelatorios().catch((erro) => {
+    console.error("Nao foi possivel carregar a pasta dos relatorios.", erro);
+});
+
+botaoSelecionarPasta.addEventListener("click", selecionarPastaRelatorios);
+
+if (relatorioPendente) {
+    botaoGerarRelatorio.textContent = "Baixar relatório";
+}
+
+// Botão manual para gerar relatório
+botaoGerarRelatorio.addEventListener("click", async () => {
+    if (!relatorioPendente) {
+        const mesDoRelatorio = obterMesAtual();
+        relatorioPendente = criarRelatorioPendente(mesDoRelatorio);
+        localStorage.setItem(
+            chaveRelatorioPendente,
+            JSON.stringify(relatorioPendente)
+        );
+
+        alert(
+            "O relatorio foi preparado. Clique em OK para atualizar a pagina. Depois da atualizacao, clique novamente para baixar."
+        );
+        window.location.reload();
+        return;
+    }
+
+    await carregamentoDaPasta;
+
+    const relatorioParaBaixar = { ...relatorioPendente };
+    relatorioPendente = null;
+    localStorage.removeItem(chaveRelatorioPendente);
+
+    const dataAtual = new Date();
+    const nomeArquivo = obterNomeArquivoRelatorioAtual(dataAtual);
+
+    console.log("Data atual do download:", dataAtual);
+    console.log("Ano atual do download:", dataAtual.getFullYear());
+    console.log("Mes atual do download:", dataAtual.getMonth() + 1);
+    console.log("Nome calculado:", nomeArquivo);
+    console.log("Relatorio pendente:", relatorioParaBaixar);
+
+    await baixarArquivoTxt(
+        nomeArquivo,
+        relatorioParaBaixar.conteudo
+    );
+
+    botaoGerarRelatorio.textContent = "Gerar Relatório";
+});
 
 
 // ========================================
@@ -58,6 +291,18 @@ const formSenha = overlay.querySelector("form");
 
 function salvarVendedores() {
     localStorage.setItem("vendedores", JSON.stringify(vendedores));
+}
+
+function atualizarTextoVendedor(li, vendedor) {
+    if (!li) {
+        return;
+    }
+
+    const p = li.querySelector(".p_cor");
+
+    if (p) {
+        p.textContent = `${vendedor.nome}: ${vendedor.vezesVermelho}`;
+    }
 }
 
 function aplicarCorVisual(li, cor) {
@@ -85,7 +330,6 @@ function criarElementoVendedor(vendedor) {
     const li = document.createElement("li");
 
     const p = document.createElement("p");
-    p.textContent = vendedor.nome;
     p.classList.add("p_cor");
 
     const botaoCor = document.createElement("button");
@@ -117,6 +361,7 @@ function criarElementoVendedor(vendedor) {
     li.appendChild(botaoCima);
     li.appendChild(botaoBaixo);
 
+    atualizarTextoVendedor(li, vendedor);
     aplicarCorVisual(li, vendedor.cor);
 
     return li;
@@ -183,6 +428,7 @@ botaoAdicionar.addEventListener("click", () => {
     const novoVendedor = {
         nome,
         cor: "verde",
+        vezesVermelho: 0,
     };
 
     vendedores.unshift(novoVendedor);
@@ -228,20 +474,57 @@ lista.addEventListener("click", (event) => {
         const vendedor = vendedores[index];
         const novaCor = vendedor.cor === "verde" ? "vermelho" : "verde";
 
+        if (vendedor.cor === "vermelho") {
+            vendedores.splice(index, 1);
+
+            const vendedorAtualizado = {
+                ...vendedor,
+                cor: novaCor,
+            };
+
+            const ultimoVerde = vendedores.reduce(
+                (ultimoIndex, item, itemIndex) =>
+                    item.cor === "verde" ? itemIndex : ultimoIndex,
+                -1
+            );
+            const novaPosicao = ultimoVerde + 1;
+
+            vendedores.splice(novaPosicao, 0, vendedorAtualizado);
+            atualizarTextoVendedor(li, vendedorAtualizado);
+            aplicarCorVisual(li, novaCor);
+
+            const referencia = lista.children[novaPosicao];
+            if (referencia) {
+                lista.insertBefore(li, referencia);
+            } else {
+                lista.appendChild(li);
+            }
+
+            salvarVendedores();
+            return;
+        }
+
         vendedores.splice(index, 1);
 
         if (novaCor === "vermelho") {
-            vendedores.push({
+            const vendedorAtualizado = {
                 ...vendedor,
                 cor: novaCor,
-            });
+                vezesVermelho: vendedor.vezesVermelho + 1,
+            };
+
+            vendedores.push(vendedorAtualizado);
+            atualizarTextoVendedor(li, vendedorAtualizado);
             aplicarCorVisual(li, novaCor);
             lista.appendChild(li);
         } else {
-            vendedores.unshift({
+            const vendedorAtualizado = {
                 ...vendedor,
                 cor: novaCor,
-            });
+            };
+
+            vendedores.unshift(vendedorAtualizado);
+            atualizarTextoVendedor(li, vendedorAtualizado);
             aplicarCorVisual(li, novaCor);
             lista.prepend(li);
         }
